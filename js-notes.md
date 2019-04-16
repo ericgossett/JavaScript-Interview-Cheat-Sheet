@@ -2979,3 +2979,58 @@ var todoController = new Controller(todo, todoView);
 
 todoView.init();
 ```
+
+# Questions recieved on interviews
+
+
+## Balanced parentheses
+
+Given an array of strings made up of bracket characters only determine if the input array is valid or invalid
+
+
+`([)] -> false`
+
+`([{}]) -> true`
+
+### Logic
+
+- Declare a character stack S.
+- Traverse the string.
+- If the current character is an opening bracket, push to the stack
+- If the current character is a closing bracket pop from the stack and if the popped character is the matching starting bracket then fine.
+- At the end of traversal, if there is some opening bracket left in the stack then the string is not balanced, hence, return false.
+
+```JavaScript
+
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+
+function isValid(str) {
+
+  if (str.length <= 1)
+    return false
+
+  let matchingOpeningBracket, ch
+  let stack = []
+
+  let openingBrackets = ['[', '{', '(']
+  let closingBrackets = [']', '}', ')']
+
+  for (let i = 0; i < str.length; i++) {
+    ch = str[i]
+
+    if (closingBrackets.indexOf(ch) > -1) {
+      matchingOpeningBracket = openingBrackets[closingBrackets.indexOf(ch)]
+      if (stack.length == 0 || (stack.pop() != matchingOpeningBracket)) {
+        return false
+      }
+    } else {
+      stack.push(ch)
+    }
+  }
+
+  return (stack.length == 0)
+};
+```
