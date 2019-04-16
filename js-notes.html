@@ -1,0 +1,2991 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>js-notes.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding: 0 12px;
+	line-height: 22px;
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light,
+.vscode-light pre code {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark,
+.vscode-dark pre code {
+	color: #DDD;
+}
+
+.vscode-high-contrast,
+.vscode-high-contrast pre code {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light pre:not(.hljs),
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre:not(.hljs),
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre:not(.hljs),
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family:  "Meiryo", "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+</head>
+<body>
+<h1 id="javascript-basics">JavaScript Basics</h1>
+<h2 id="big-o-notation">Big O notation</h2>
+<p>Rules:</p>
+<ol>
+<li>Different steps get added <code>O(N) + O(M) -&gt; O(N+M)</code>.</li>
+<li>Drop constants <code>O(2N) -&gt; O(N)</code>.</li>
+<li>Different inputs use different variables.</li>
+<li>Drop non-dominant terms <code>O(N + N^2) -&gt; O(N^2)</code>.</li>
+</ol>
+<p><img src="imgs/big_o_graph.png" alt=""></p>
+<h3 id="array-sorting-algorithms">Array Sorting Algorithms</h3>
+<p><img src="imgs/big_o_arr.png" alt=""></p>
+<h3 id="common-data-structures">Common Data Structures</h3>
+<p><img src="imgs/big_o_structs.png" alt=""></p>
+<h3 id="searching">Searching</h3>
+<p><img src="imgs/big_o_search.png" alt=""></p>
+<h2 id="hoisting">Hoisting</h2>
+<p>Hoisting is a process of pushing the declared variables to the top of the program while running it. In this mechanism, a JavaScript VM does two things while running a program:</p>
+<ol>
+<li>First scan the program, collect all the variable and function declarations and assign memory spaces for it.</li>
+<li>Run the program now by filling variable values assigned any, if not, fill undefined</li>
+</ol>
+<h2 id="strict-mode">Strict Mode</h2>
+<p>To use place <code>'use strict';</code> at the top of a script. Strict mode makes several changes to normal JavaScript semantics.</p>
+<ol>
+<li>Eliminates some JavaScript silent errors by changing them to throw errors.</li>
+<li>Fixes mistakes that make it difficult for JavaScript engines to perform optimizations: strict mode code can sometimes be made to run faster than identical code that's not strict mode.</li>
+<li>Prohibits some syntax likely to be defined in future versions of ECMAScript.</li>
+</ol>
+<h2 id="null-vs-undefined">Null vs Undefined</h2>
+<p>JavaScript has two distinct values for nothing, <code>null</code> and <code>undefined</code>.</p>
+<h3 id="undefined">undefined</h3>
+<p><code>undefined</code> means, value of the variable is not defined. JavaScript has a global variable <code>undefined</code> whose value is &quot;undefined&quot; and <code>typeof</code> undefined is also &quot;undefined&quot;. Remember, undefined is not a constant or a keyword. undefined is a type with exactly one value: undefined. Assigning a new value to it does not change the value of the type undefined.</p>
+<p>Ways to get undefined:</p>
+<ul>
+<li>A declared variable without assigning any value to it.</li>
+<li>Implicit returns of functions due to missing return statements.</li>
+<li>return statements that do not explicitly return anything.</li>
+<li>Lookups of non-existent properties in an object.</li>
+<li>Function parameters that have not passed.</li>
+<li>Anything that has been set to the value of undefined.</li>
+<li>Any expression in the form of void(expression)</li>
+<li>The value of the global variable undefined</li>
+</ul>
+<h3 id="null">null</h3>
+<p><code>null</code> means empty or non-existent value which is used by programmers to indicate “no value”. null is a primitive value and you can assign null to any variable. null is not an object, it is a primitive value. For example, you cannot add properties to it. Sometimes people wrongly assume that it is an object, because typeof null returns &quot;object&quot;.</p>
+<h3 id="werid-quirk">Werid quirk</h3>
+<p><code>null == undefined</code></p>
+<h2 id="extending-core-object">Extending Core Object</h2>
+<p>A Object can be extending by declaring a method on the prototype of the object in question.</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">Date</span>.prototype.nextDay = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+  <span class="hljs-keyword">var</span> currentDate = <span class="hljs-keyword">this</span>.getDate();
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-keyword">this</span>.setDate(currentDate +<span class="hljs-number">1</span>));
+}
+
+<span class="hljs-keyword">var</span> date = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(); 
+date; <span class="hljs-comment">//Fri May 16 2014 20:47:14 GMT-0500 (Central Daylight Time)</span>
+date.nextDay();<span class="hljs-comment">//Sat May 17 2014 20:47:14 GMT-0500 (Central Daylight Time)</span>
+</div></code></pre>
+<h2 id="equivalience-operators">Equivalience operators</h2>
+<p><code>===</code> test for a <strong>strict</strong> equality, meaning that both the <strong>type</strong> and <strong>value</strong> we are comparing are the same.</p>
+<p><code>==</code> test for a <strong>loose</strong> equality, meaning only the value is tested. Note: double equals performs a <strong>type coercion</strong> meaning that the two values are compared after attempted to convert them into a common type.</p>
+<p>takeaway: Triple Equals is superior to double equals. Whenever possible, you should use triple equals to test equality. By testing the type and value you can be sure that you are always executing a true equality test.</p>
+<h2 id="this">This</h2>
+<p>At the time of execution of every function, JavaScript engine sets a property to the function called <code>this</code> which refer to the current execution context. <code>this</code> is always refer to an object and depends on how function is called. There are 7 different cases where the value of <code>this</code> varies:</p>
+<ol>
+<li>In the global context or inside a function this refers to the window object.</li>
+<li>Inside IIFE (immediate invoking function) if you use &quot;use strict&quot;, value of this is undefined. To pass access window inside IIFE with &quot;use strict&quot;, you have to pass this.</li>
+<li>While executing a function in the context of an object, the object becomes the value of this</li>
+<li>Inside a setTimeout function, the value of this is the window object.</li>
+<li>If you use a constructor (by using new keyword) to create an object, the value of this will refer to the newly created object.</li>
+<li>You can set the value of this to any arbitrary object by passing the object as the first parameter of bind, call or apply</li>
+<li>For dom event handler, value of this would be the element that fired the event</li>
+</ol>
+<h2 id="pass-by-value-vs-reference">Pass By Value vs Reference</h2>
+<p>Primitive type (string, number, etc.) are passed by value and objects are passed by reference. If you change a property of the passed object, the change will be affected. However, you assign a new object to the passed object, the changes will not be reflected.</p>
+<h2 id="currying">Currying</h2>
+<p>Curring is partial invocation of a function. Currying means first few arguments of a function is pre-processed and a function is returned. The returning function can add more arguments to the curried function. It's like if you have given one or two spice to the curry and cooked little bit, still you can add further spice to it. A simple example will look like:</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addBase</span>(<span class="hljs-params">base</span>)</span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">num</span>)</span>{
+    <span class="hljs-keyword">return</span> base + num;
+  }
+}
+
+<span class="hljs-keyword">var</span> addTen = addBase(<span class="hljs-number">10</span>);
+addTen(<span class="hljs-number">5</span>); <span class="hljs-comment">//15</span>
+addTen(<span class="hljs-number">80</span>); <span class="hljs-comment">//90</span>
+addTen(<span class="hljs-number">-5</span>); <span class="hljs-comment">//5</span>
+</div></code></pre>
+<h2 id="event-bubbling-and-capturing">Event Bubbling and Capturing</h2>
+<p>Event bubbling and capturing are two ways of event propagation in the HTML DOM API, when an event occurs in an element inside another element, and both elements have registered a handle for that event. The event propagation mode determines in which order the elements receive the event.</p>
+<p>With bubbling, the event is first captured and handled by the innermost element and then propagated to outer elements.</p>
+<pre class="hljs"><code><div>               / \
+---------------| |-----------------
+| element1     | |                |
+|   -----------| |-----------     |
+|   |element2  | |          |     |
+|   -------------------------     |
+|        Event BUBBLING           |
+-----------------------------------
+</div></code></pre>
+<p>The event handler of element1 fires first, the event handler of element2 fires last.</p>
+<p>With capturing, the event is first captured by the outermost element and propagated to the inner elements.</p>
+<pre class="hljs"><code><div>               | |
+---------------| |-----------------
+| element1     | |                |
+|   -----------| |-----------     |
+|   |element2  \ /          |     |
+|   -------------------------     |
+|        Event CAPTURING          |
+-----------------------------------
+</div></code></pre>
+<p>The event handler of element2 fires first, the event handler of element1 fires last.</p>
+<h2 id="bind-apply-and-call">Bind, Apply and Call</h2>
+<p>TLDR: Use <code>bind()</code> when you want a function to later be called with a certain context, e.g. events. User <code>call()</code> or <code>apply()</code> when you want to invoke the function immediately, with modification of the context.</p>
+<h1 id="prototypical-inheritance">Prototypical Inheritance</h1>
+<p>In traditional JavaScript, there is the concept of inheritance in a camouflage. It is by using a technique of prototyping. All the new class syntax you see in ES5, ES6 is just a syntactical sugar coating for the underlying prototypical OOP. Creating a class is done using a function in JavaScript.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> animalGroups = {
+  <span class="hljs-attr">MAMMAL</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">REPTILE</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">AMPHIBIAN</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">INVERTEBRATE</span>: <span class="hljs-number">4</span>
+};
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Animal</span>(<span class="hljs-params">name, type</span>) </span>{
+  <span class="hljs-keyword">this</span>.name = name;
+  <span class="hljs-keyword">this</span>.type = type;
+}
+
+<span class="hljs-keyword">var</span> dog = <span class="hljs-keyword">new</span> Animal(<span class="hljs-string">"dog"</span>, animalGroups.MAMMAL);
+<span class="hljs-keyword">var</span> crocodile = <span class="hljs-keyword">new</span> Animal(<span class="hljs-string">"crocodile"</span>, animalGroups.REPTILE);
+</div></code></pre>
+<p>Here we are creating objects for the class (using new keyword). We can add methods for a given class(function) like this. Attach a class method like this.</p>
+<pre class="hljs"><code><div>Animal.prototype.shout = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.name + <span class="hljs-string">'is '</span> + <span class="hljs-keyword">this</span>.sound + <span class="hljs-string">'ing...'</span>);
+}
+</div></code></pre>
+<p>Here you may get a doubt. There is no sound property in the class. Yes! there is hardly a sound property defined. That is intended to be passed by the child classes who inherits above class.</p>
+<p>In JavaScript, inheritance is achieved like this.</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Dog</span>(<span class="hljs-params">name, type</span>) </span>{
+   Animal.call(<span class="hljs-keyword">this</span>, name, type);
+   <span class="hljs-keyword">this</span>.sound = <span class="hljs-string">"bow"</span>;
+}
+</div></code></pre>
+<p>I defined one more specific function called Dog. Here, in order to inherit the Animal class, we need to perform call function(we discussed it earlier) with passing this and other arguments. We can instantiate a German Shepard like this.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> pet = Dog(<span class="hljs-string">"germanShepard"</span>, animalGroups.MAMMAL);
+<span class="hljs-built_in">console</span>.log(pet); <span class="hljs-comment">// returns Dog {name: "germanShepard", type: 1, sound: "bow"}</span>
+</div></code></pre>
+<p>We are not assigning name and type in the child function, we are calling super function Animal and setting the respective properties. The pet is having the properties(name, type) of the parent. But what about the methods. Are they inherited too? Let us see!</p>
+<pre class="hljs"><code><div>pet.shout(); <span class="hljs-comment">// Throws error</span>
+</div></code></pre>
+<p>What? why did that happen? It happens because we didn’t say JavaScript to inherit the parent class methods. How to fix that?</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Link prototype chains</span>
+Dog.prototype = <span class="hljs-built_in">Object</span>.create(Animal.prototype);
+<span class="hljs-keyword">var</span> pet = <span class="hljs-keyword">new</span> Dog(<span class="hljs-string">"germanShepard"</span>, animalGroups.MAMMAL);
+
+<span class="hljs-comment">// Now shout method is available</span>
+pet.shout(); <span class="hljs-comment">// germanShepard is bowing...</span>
+</div></code></pre>
+<p>Now shout method is available. We can check what is the class of given object in JavaScript using the object.constructor function. Let us check what is the class of our pet.</p>
+<pre class="hljs"><code><div>pet.constructor; <span class="hljs-comment">// returns Animal</span>
+</div></code></pre>
+<p>It is vague. The Animal is a parent class. But what type exactly is the pet?It is a Dog type. This occurs because of the constructor of Dog class.</p>
+<pre class="hljs"><code><div>Dog.prototype.constructor; <span class="hljs-comment">// returns Animal</span>
+</div></code></pre>
+<p>It is Animal. We should set it to Dog class itself so that all instances(objects) of the class should give correct class name where it belongs to.</p>
+<pre class="hljs"><code><div>Dog.prototype.constructor = Dog;
+</div></code></pre>
+<p>Things to remember about prototypical inheritance:</p>
+<ol>
+<li>Class properties are bound using this</li>
+<li>Class methods are bound using prototype object</li>
+<li>To inherit properties, use call function passing this object</li>
+<li>To inherit methods, use Object.create to link prototypes of parent and child</li>
+<li>Always set child class constructor to itself for getting the right identity of its objects</li>
+</ol>
+<p><strong>note:</strong> These are things happens under the hood even with new class syntax. Knowing these is valuable for your JS knowledge.</p>
+<p>In JS, call function and prototype object provides inheritance</p>
+<h2 id="closures">Closures</h2>
+<p>A closure is a function defined inside another function (called parent function) and has access to the variable which is declared and defined in parent function scope.</p>
+<p>The closure has access to the variable in three scopes:</p>
+<ol>
+<li>Variable declared in his own scope</li>
+<li>Variable declared in parent function scope</li>
+<li>Variable declared in the global namespace</li>
+</ol>
+<p>example:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> globalVar = <span class="hljs-string">"abc"</span>;
+
+<span class="hljs-comment">// Parent self invoking function</span>
+(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">outerFunction</span> (<span class="hljs-params">outerArg</span>) </span>{ <span class="hljs-comment">// begin of scope outerFunction</span>
+  <span class="hljs-comment">// Variable declared in outerFunction function scope</span>
+  <span class="hljs-keyword">var</span> outerFuncVar = <span class="hljs-string">'x'</span>;    
+  <span class="hljs-comment">// Closure self-invoking function</span>
+  (<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">innerFunction</span> (<span class="hljs-params">innerArg</span>) </span>{ <span class="hljs-comment">// begin of scope innerFunction</span>
+    <span class="hljs-comment">// variable declared in innerFunction function scope</span>
+    <span class="hljs-keyword">var</span> innerFuncVar = <span class="hljs-string">"y"</span>;
+    <span class="hljs-built_in">console</span>.log(         
+      <span class="hljs-string">"outerArg = "</span> + outerArg + <span class="hljs-string">"\n"</span> +
+      <span class="hljs-string">"outerFuncVar = "</span> + outerFuncVar + <span class="hljs-string">"\n"</span> +
+      <span class="hljs-string">"innerArg = "</span> + innerArg + <span class="hljs-string">"\n"</span> +
+      <span class="hljs-string">"innerFuncVar = "</span> + innerFuncVar + <span class="hljs-string">"\n"</span> +
+      <span class="hljs-string">"globalVar = "</span> + globalVar);
+  <span class="hljs-comment">// end of scope innerFunction</span>
+  })(<span class="hljs-number">5</span>); <span class="hljs-comment">// Pass 5 as parameter</span>
+<span class="hljs-comment">// end of scope outerFunction</span>
+})(<span class="hljs-number">7</span>); <span class="hljs-comment">// Pass 7 as parameter</span>
+</div></code></pre>
+<h2 id="objects">Objects</h2>
+<h3 id="objectcreate-method">Object.create method</h3>
+<p><code>Object.create()</code> method is the easiest way for one object to inherit from another, without invoking a constructor function.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> employee = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">'Nishant'</span>,
+  <span class="hljs-attr">displayName</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.name);
+  }
+};
+
+<span class="hljs-keyword">var</span> emp1 = <span class="hljs-built_in">Object</span>.create(employee);
+<span class="hljs-built_in">console</span>.log(emp1.displayName());  <span class="hljs-comment">// output "Nishant"</span>
+</div></code></pre>
+<p>1 Prevent extensions:</p>
+<p>No new properties or methods can be added to the object, but one can change the existing properties and method.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> employee = {
+	<span class="hljs-attr">name</span>: <span class="hljs-string">"Nishant"</span>
+};
+
+<span class="hljs-comment">// lock the object </span>
+<span class="hljs-built_in">Object</span>.preventExtensions(employee);
+
+<span class="hljs-comment">// Now try to change the employee object property name</span>
+employee.name = <span class="hljs-string">"John"</span>; <span class="hljs-comment">// work fine </span>
+
+<span class="hljs-comment">//Now try to add some new property to the object</span>
+employee.age = <span class="hljs-number">24</span>; <span class="hljs-comment">// fails silently unless it's inside the strict mode</span>
+</div></code></pre>
+<p>2 Seal:</p>
+<p>It is same as prevent extension, in addition to this also prevent existing properties and methods from being deleted.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> employee = {
+	<span class="hljs-attr">name</span>: <span class="hljs-string">"Nishant"</span>
+};
+
+<span class="hljs-comment">// Seal the object </span>
+<span class="hljs-built_in">Object</span>.seal(employee);
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.isExtensible(employee)); <span class="hljs-comment">// false</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.isSealed(employee)); <span class="hljs-comment">// true</span>
+
+<span class="hljs-keyword">delete</span> employee.name <span class="hljs-comment">// fails silently unless it's in strict mode</span>
+
+<span class="hljs-comment">// Trying to add new property will give an error</span>
+employee.age = <span class="hljs-number">30</span>; <span class="hljs-comment">// fails silently unless in strict mode</span>
+</div></code></pre>
+<p>3 Freeze:</p>
+<p>Same as seal, In addition to this prevent existing properties methods from being modified (All properties and methods are read only).</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> employee = {
+	<span class="hljs-attr">name</span>: <span class="hljs-string">"Nishant"</span>
+};
+
+<span class="hljs-comment">//Freeze the object</span>
+<span class="hljs-built_in">Object</span>.freeze(employee); 
+
+<span class="hljs-comment">// Seal the object </span>
+<span class="hljs-built_in">Object</span>.seal(employee);
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.isExtensible(employee)); <span class="hljs-comment">// false</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.isSealed(employee));     <span class="hljs-comment">// true</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.isFrozen(employee));     <span class="hljs-comment">// true</span>
+
+
+employee.name = <span class="hljs-string">"xyz"</span>; <span class="hljs-comment">// fails silently unless in strict mode</span>
+employee.age = <span class="hljs-number">30</span>;     <span class="hljs-comment">// fails silently unless in strict mode</span>
+<span class="hljs-keyword">delete</span> employee.name   <span class="hljs-comment">// fails silently unless it's in strict mode</span>
+</div></code></pre>
+<h3 id="creating-immutable-objects">Creating Immutable Objects</h3>
+<p>several methods exisit to prevent modification of object which lock down object to ensure that no one, accidentally or otherwise, change functionality of Object.</p>
+<h2 id="callbacks">Callbacks</h2>
+<p>Callbacks are the functions those executed after an I/O operation is done. A time taking I/O operation can block the code not allowing further execution in Python/Ruby. But in JavaScript, due to the allowed asynchronous execution, we can provide callbacks to the async functions. The example is an AJAX(XMLHttpRequest) call from the browser to a server, events generated by the mouse. keyboard etc. Example is:</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reqListener</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.responseText);
+}
+
+<span class="hljs-keyword">var</span> req = <span class="hljs-keyword">new</span> XMLHttpRequest();
+req.addEventListener(<span class="hljs-string">"load"</span>, reqListener);
+req.open(<span class="hljs-string">"GET"</span>, <span class="hljs-string">"http://www.example.org/example.txt"</span>);
+req.send();
+</div></code></pre>
+<p>Here reqListener is the callback which will be executed when a GET request to is successfully responded back.</p>
+<h2 id="promises">Promises</h2>
+<p>A Promise is a proxy for a value not necessarily known when the promise is created. It allows you to associate handlers to an asynchronous action's eventual success value or failure reason. This lets asynchronous methods return values like synchronous methods: instead of the final value, the asynchronous method returns a promise for the value at some point in the future.</p>
+<pre><code>In simple words “A promise is a word taken for some action, the other party who gave the promise might fulfill it or deny it”. In the case of fulfilling, the promise gets resolved, and in another case, it gets rejected.
+</code></pre>
+<p>General Syntax:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> myPromise = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject</span>)</span>{
+   ....
+})
+</div></code></pre>
+<p>example:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> isMomHappy = <span class="hljs-literal">true</span>;
+
+<span class="hljs-comment">// Promise</span>
+<span class="hljs-keyword">const</span> willIGetNewPhone = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(
+    <span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> { <span class="hljs-comment">// fat arrow</span>
+        <span class="hljs-keyword">if</span> (isMomHappy) {
+            <span class="hljs-keyword">const</span> phone = {
+                <span class="hljs-attr">brand</span>: <span class="hljs-string">'Samsung'</span>,
+                <span class="hljs-attr">color</span>: <span class="hljs-string">'black'</span>
+            };
+            resolve(phone);
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">const</span> reason = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'mom is not happy'</span>);
+            reject(reason);
+        }
+
+    }
+);
+
+<span class="hljs-keyword">const</span> showOff = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">phone</span>) </span>{
+    <span class="hljs-keyword">const</span> message = <span class="hljs-string">'Hey friend, I have a new '</span> +
+                phone.color + <span class="hljs-string">' '</span> + phone.brand + <span class="hljs-string">' phone'</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve(message);
+};
+
+<span class="hljs-comment">// call our promise</span>
+<span class="hljs-keyword">const</span> askMom = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    willIGetNewPhone
+        .then(showOff)
+        .then(<span class="hljs-function"><span class="hljs-params">fulfilled</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(fulfilled)) <span class="hljs-comment">// fat arrow</span>
+        .catch(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(error.message)); <span class="hljs-comment">// fat arrow</span>
+};
+
+askMom();
+</div></code></pre>
+<h3 id="async-and-await">Async and Await</h3>
+<p>ES7 introduce <code>async</code> and <code>await</code> syntax. It makes the asynchronous syntax look prettier and easier to understand, without the <code>.then</code> and <code>.catch</code>.</p>
+<p>Using the example above the <code>showOff</code> and <code>askMom</code> function will now look like this:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> isMomHappy = <span class="hljs-literal">true</span>;
+
+<span class="hljs-comment">// Promise</span>
+<span class="hljs-keyword">const</span> willIGetNewPhone = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(...);
+
+<span class="hljs-comment">// 2nd promise</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">showOff</span>(<span class="hljs-params">phone</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(
+        <span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> {
+            <span class="hljs-keyword">var</span> message = <span class="hljs-string">'Hey friend, I have a new '</span> +
+                phone.color + <span class="hljs-string">' '</span> + phone.brand + <span class="hljs-string">' phone'</span>;
+
+            resolve(message);
+        }
+    );
+};
+
+<span class="hljs-comment">// call our promise</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">askMom</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'before asking Mom'</span>);
+
+        <span class="hljs-keyword">let</span> phone = <span class="hljs-keyword">await</span> willIGetNewPhone;
+        <span class="hljs-keyword">let</span> message = <span class="hljs-keyword">await</span> showOff(phone);
+
+        <span class="hljs-built_in">console</span>.log(message);
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'after asking mom'</span>);
+    }
+    <span class="hljs-keyword">catch</span> (error) {
+        <span class="hljs-built_in">console</span>.log(error.message);
+    }
+}
+
+(<span class="hljs-keyword">async</span> () =&gt; {
+    <span class="hljs-keyword">await</span> askMom();
+})();
+</div></code></pre>
+<h2 id="map-reduce-filter">Map, Reduce, Filter</h2>
+<h3 id="map">Map</h3>
+<p>Map function is available on an array. It returns a new array by applying a transformation function on each element in the array. The general syntax is:</p>
+<pre class="hljs"><code><div>
+arr.map((elem){
+    process(elem)
+    <span class="hljs-keyword">return</span> processedValue
+}) <span class="hljs-comment">// returns new array with each element processed</span>
+
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> data = [<span class="hljs-string">"2345-34r"</span>, <span class="hljs-string">"2e345-211"</span>, <span class="hljs-string">"543-67i4"</span>, <span class="hljs-string">"346-598"</span>];
+<span class="hljs-keyword">var</span> re = <span class="hljs-regexp">/[a-z A-Z]/</span>;
+
+<span class="hljs-keyword">var</span> cleanedData = data.map(<span class="hljs-function">(<span class="hljs-params">elem</span>) =&gt;</span> {<span class="hljs-keyword">return</span> elem.replace(re, <span class="hljs-string">""</span>)});
+
+<span class="hljs-built_in">console</span>.log(cleanedData); <span class="hljs-comment">// ["2345-34", "2345-211", "543-674", "346-598"]</span>
+</div></code></pre>
+<h3 id="reduce">Reduce</h3>
+<p>Reduce as the name suggests reduces a given list to one final result. The general syntax is:</p>
+<pre class="hljs"><code><div>arr.reduce((accumulator,
+           currentValue,
+           currentIndex) =&gt; {
+           process(accumulator, currentValue)
+           <span class="hljs-keyword">return</span> intermediateValue/finalValue
+}, initialAccumulatorValue) <span class="hljs-comment">// returns reduced value</span>
+</div></code></pre>
+<p>example:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> arr = [[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>], [<span class="hljs-number">5</span>, <span class="hljs-number">6</span>]];
+<span class="hljs-keyword">var</span> flattenedArray = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>];
+<span class="hljs-keyword">var</span> flattenedArray = arr.reduce(<span class="hljs-function">(<span class="hljs-params">accumulator, currentValue</span>) =&gt;</span> {
+    <span class="hljs-keyword">return</span> accumulator.concat(currentValue);
+}, []); <span class="hljs-comment">// returns [1, 2, 3, 4, 5, 6]</span>
+</div></code></pre>
+<h2 id="filter">Filter</h2>
+<p>Filter filters the array given a filtering function. The general syntax is</p>
+<pre class="hljs"><code><div>
+arr.filter(<span class="hljs-function">(<span class="hljs-params">elem</span>) =&gt;</span> {
+   <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>/<span class="hljs-literal">false</span>
+})
+
+</div></code></pre>
+<p>example:</p>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">var</span> words = [<span class="hljs-string">"tiger"</span>, <span class="hljs-string">"toast"</span>, <span class="hljs-string">"boat"</span>, <span class="hljs-string">"tumor"</span>, <span class="hljs-string">"track"</span>, <span class="hljs-string">"bridge"</span>]
+
+<span class="hljs-keyword">var</span> newData = words.filter(<span class="hljs-function">(<span class="hljs-params">elem</span>) =&gt;</span> {
+   <span class="hljs-keyword">return</span> elem.startsWith(<span class="hljs-string">'t'</span>) &amp;&amp; elem.endsWith(<span class="hljs-string">'r'</span>) ? <span class="hljs-literal">true</span>:<span class="hljs-literal">false</span>;
+}); <span class="hljs-comment">// returns ["tiger", "tumor"]</span>
+
+</div></code></pre>
+<h1 id="data-structures">DATA STRUCTURES</h1>
+<h2 id="stack">Stack</h2>
+<p>A stack is simply an <code>array</code> with two prinicpled operations: <code>push</code> and <code>pop</code>. <strong>Push</strong> adds elements to the top of the array while <strong>Pop</strong> removes them from the same location.</p>
+<p>In other words, stacks follow the 'Last In, First Out' protocol.</p>
+<p><strong>where it is used</strong>: In javascript the most important Stack is the call stack where we push the scope of a function.</p>
+<h3 id="example">Example</h3>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Stack</span> </span>{
+    <span class="hljs-keyword">constructor</span>(...items) {
+        <span class="hljs-keyword">this</span>.reverse = <span class="hljs-literal">false</span>;
+        <span class="hljs-keyword">this</span>.stack = [...items];
+    }
+
+    push(...items) {
+        <span class="hljs-comment">// if reverse we use unshift over pop</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.reverse ? <span class="hljs-keyword">this</span>.stack.unshift(...items): <span class="hljs-keyword">this</span>.stack.push(...items);
+    }
+
+    pop() {
+        <span class="hljs-comment">// if reverse we use shift over pop</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.reverse ? <span class="hljs-keyword">this</span>.stack.shift() : <span class="hljs-keyword">this</span>.stack.pop()
+    }
+}
+
+<span class="hljs-comment">// use</span>
+
+<span class="hljs-keyword">const</span> stack = <span class="hljs-keyword">new</span> Stack(<span class="hljs-number">4</span>, <span class="hljs-number">5</span>);
+stack.push(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>);
+stack.pop();
+
+<span class="hljs-comment">// to reverse</span>
+stack.reverse = <span class="hljs-literal">true</span>;
+</div></code></pre>
+<h2 id="queue">Queue</h2>
+<p><code>Queues</code> are just arrays with two primary operations: unshift and pop. <strong>Unshift</strong> enquees items to the end of the array, while <strong>Pop</strong> dequeues them from the beginning of the array.</p>
+<p><strong>Queues</strong> follow the 'First In, First Out' protocol.</p>
+<p><strong>where it is used</strong>: JavaScript is an <strong>event-driven</strong> language which supports <em>non-blocking</em> operations. The browser manages only a single thread to run the entire code using and <strong>event queue</strong> to <em>enqueue</em> <code>listeners</code> and the <strong>event loop</strong> to <em>listen</em> for the registered <code>events</code>. Listener functions <em>dequeue</em> and execute only when the call stack is empty.</p>
+<h3 id="example">Example</h3>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Queue</span> </span>{
+    <span class="hljs-keyword">constructor</span>(...items) {
+        <span class="hljs-keyword">this</span>.reverse = <span class="hljs-literal">false</span>
+        <span class="hljs-keyword">this</span>.queue = [...items];
+    }
+
+    enqueue(...items) {
+        <span class="hljs-comment">// if reverse use push over unshift</span>
+        <span class="hljs-comment">// note: the only difference over a stack is the flip in</span>
+        <span class="hljs-comment">// whats called here when reversed.</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.reverse ? <span class="hljs-keyword">this</span>.queue.push(...items) : <span class="hljs-keyword">this</span>.queue.unshift(...items);
+    }
+
+    dequeue() {
+        <span class="hljs-comment">// if reverse use shift over pop</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.reverse ? <span class="hljs-keyword">this</span>.queue.shift() : <span class="hljs-keyword">this</span>.queue.pop();
+    }
+}
+</div></code></pre>
+<h2 id="linked-list">Linked List</h2>
+<p>Like arrays <code>linked list</code> store data in sequential order. However rather than keeping indices, they store pointers to other elements. The <em>first node</em> is called the <code>head</code> while the <em>last node</em> is called the <code>tail</code>. A <strong>singly-linked list</strong> has nodes which only point to the next node, while a <strong>doubly-linked list</strong> points to both the next and previous nodes.</p>
+<p>They have constant-time insertions and deletions because the pointer can just be changed. Moreover, they can grow as long as their is space much cheaper than dynamic arrays. The downside: looking up an element requires traversing the whole list which takes linear time.</p>
+<p><strong>use cases</strong>: Linked list can operate as stacks and queues. For large elements a doubly linked list is a more performant way to implemnt a queue over arrays.</p>
+<p>Finally, they are used in state management librarys like <strong>Redux</strong> for the middlewares and in <strong>Express</strong> for the same use-case.</p>
+<h3 id="example">Example</h3>
+<pre class="hljs"><code><div>Class Node {
+    <span class="hljs-keyword">constructor</span>(value, next, prev) {
+        <span class="hljs-keyword">this</span>.value = value;
+        <span class="hljs-keyword">this</span>.next = next;
+        <span class="hljs-keyword">this</span>.prev = prev;
+    }
+}
+
+Class DoublyLinkedList {
+    <span class="hljs-keyword">constructor</span>() {
+        <span class="hljs-keyword">this</span>.head = <span class="hljs-literal">null</span>;
+        <span class="hljs-keyword">this</span>.tail = <span class="hljs-literal">null</span>;
+    }
+
+    addToHead(value) {
+        <span class="hljs-keyword">const</span> node = <span class="hljs-keyword">new</span> Node(value, <span class="hljs-literal">null</span>, <span class="hljs-keyword">this</span>.head);
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.head) {
+            <span class="hljs-keyword">this</span>.head.next = node;
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">this</span>.tail = node;
+        }
+        <span class="hljs-keyword">this</span>.head = node;
+    }
+
+    addToTail(value) {
+        <span class="hljs-keyword">const</span> node = <span class="hljs-keyword">new</span> Node(value, <span class="hljs-keyword">this</span>.tail, <span class="hljs-literal">null</span>);
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.tail) {
+            <span class="hljs-keyword">this</span>.tail.prev = node;
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">this</span>.head = node;
+        }
+        <span class="hljs-keyword">this</span>.tail = node;
+    }
+
+    removeHead() {
+        <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.head) {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+        }
+        <span class="hljs-keyword">const</span> value = <span class="hljs-keyword">this</span>.head.value;
+        <span class="hljs-keyword">this</span>.head = <span class="hljs-keyword">this</span>.head.prev;
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.head) {
+            <span class="hljs-keyword">this</span>.head.next = <span class="hljs-literal">null</span>
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">this</span>.tail = <span class="hljs-literal">null</span>;
+        }
+        <span class="hljs-keyword">return</span> value;
+    }
+
+    removeTail() {
+        <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.tail) {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+        }
+        <span class="hljs-keyword">const</span> value = <span class="hljs-keyword">this</span>.tail.value;
+        <span class="hljs-keyword">this</span>.tail = <span class="hljs-keyword">this</span>.tail.next;
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.tail) {
+            <span class="hljs-keyword">this</span>.tail.prev = <span class="hljs-literal">null</span>;
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">this</span>.head = <span class="hljs-literal">null</span>;
+        }
+        <span class="hljs-keyword">return</span> value
+    }
+
+    search(value) {
+        <span class="hljs-keyword">let</span> curr = <span class="hljs-keyword">this</span>.head;
+        <span class="hljs-keyword">while</span> (curr) {
+            <span class="hljs-keyword">if</span> (curr.value === value) {
+                <span class="hljs-keyword">return</span> value;
+            }
+            curr = current.prev;
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+    }
+
+    indexOf(value) {
+        <span class="hljs-keyword">const</span> idxs = [];
+        <span class="hljs-keyword">let</span> curr = <span class="hljs-keyword">this</span>.tail;
+        <span class="hljs-keyword">let</span> idx = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">while</span> (curr) {
+            <span class="hljs-keyword">if</span> (curr.value === value) {
+                idxs.push(idx);
+            }
+            curr = curr.next;
+            idx++;
+        }
+        <span class="hljs-keyword">return</span> idxs;
+    }
+}
+</div></code></pre>
+<h2 id="tree">Tree</h2>
+<p>A <code>Tree</code> is like a linked-list however it keeps references to many <strong>child nodes</strong> in a <em>hierarchical structure</em>. Therefore, each node can have no more than one paratent.</p>
+<p>A <strong>Binary Search Tree</strong> is special case where each node can have no more than <em>two childern</em>. The <strong>left child</strong> must have a value smaller than or equal to its parent while the <strong>right child</strong> must have a greater value. Here searching is done in <em>logarithmic time</em> because one-half of the branch can be ingored. <em>Inserts</em> and <em>deletes</em> are also logrithmic.</p>
+<p>Traversal can happen vertically or horizontally. Vertical is known as <strong>Depth-First-Traversal</strong> and is done recursivly. Horizontal is known as <strong>Breadth-First Traversal</strong> and is done iterativly using a queue to track all the childern with each iteration.</p>
+<p>If the tree is wider use BFT else if its deep DFT is prefered.</p>
+<p><strong>use cases</strong>: The DOM is a tree with a root html node that branches into the head and body nodes.</p>
+<p>Note: A graph is a tree that has more than one parent.</p>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Tree</span> </span>{
+    <span class="hljs-keyword">constructor</span>(value) {
+        <span class="hljs-keyword">this</span>.value = value;
+        <span class="hljs-keyword">this</span>.left = <span class="hljs-literal">null</span>;
+        <span class="hljs-keyword">this</span>.right = <span class="hljs-literal">null</span>;
+    }
+
+    insert(value) {
+        <span class="hljs-keyword">if</span> (value &lt;= <span class="hljs-keyword">this</span>.value) {
+            <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.left) {
+                <span class="hljs-keyword">this</span>.left = <span class="hljs-keyword">new</span> Tree(value);
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-keyword">this</span>.left.insert(value);
+            }
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.right) {
+                <span class="hljs-keyword">this</span>.right = <span class="hljs-keyword">new</span> Tree(value);
+            } <span class="hljs-keyword">else</span> { 
+                <span class="hljs-keyword">this</span>.right.insert(value);
+            }
+        }
+    }
+
+    contains(value) {
+        <span class="hljs-keyword">if</span> (value === <span class="hljs-keyword">this</span>.value) {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+        <span class="hljs-keyword">if</span> (value &lt; <span class="hljs-keyword">this</span>.value) {
+            <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.left) {
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.left.contains(value);
+            }
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.right) {
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.right.contains(value);
+            }
+        }
+    }
+
+    depthFirstTraverse(order, callback) {
+        order === <span class="hljs-string">"pre"</span> &amp;&amp; callback(<span class="hljs-keyword">this</span>.value);
+        <span class="hljs-keyword">this</span>.left &amp;&amp; <span class="hljs-keyword">this</span>.left.depthFirstTraverse(order, callback);
+        order === <span class="hljs-string">"in"</span> &amp;&amp; callback(<span class="hljs-keyword">this</span>.value);
+        <span class="hljs-keyword">this</span>.right &amp;&amp; <span class="hljs-keyword">this</span>.right.depthFirstTraverse(order, callback);
+        order === <span class="hljs-string">"post"</span> &amp;&amp; callback(<span class="hljs-keyword">this</span>.value);
+    }
+
+    breadthFirstTraverse(callback) {
+        <span class="hljs-keyword">const</span> queue = [<span class="hljs-keyword">this</span>];
+        <span class="hljs-keyword">while</span> (queue.length) {
+            <span class="hljs-keyword">const</span> root = queue.shift();
+            callback(root.value);
+            root.left &amp;&amp; queue.push(root.left);
+            root.right &amp;&amp; queue.push(root.right);
+        }
+    }
+
+    getMinValue() {
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.left) <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.left.getMinValue();
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.value;
+    }
+
+    getMaxValue() {
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.right) <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.right.getMaxValue();
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.value;
+    }
+}
+</div></code></pre>
+<h2 id="hash-table">Hash Table</h2>
+<p>A hash table is a dictionary-like structure that pairs keys to values. Location of each pair in memory is determiend by as <code>hash function</code> which accepts a key and returns the address of where the pair should be inserted and retrieved.</p>
+<p><strong>use cases</strong>: The JavaScript engine uses hash tables called <em>heaps</em> to store all variables and primitives created. They are accesed from pointers on the call stack.</p>
+<h3 id="example">Example</h3>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Node</span> </span>{
+    <span class="hljs-keyword">constructor</span>(key, value) {
+        <span class="hljs-keyword">this</span>.key = key;
+        <span class="hljs-keyword">this</span>.value = value;
+        <span class="hljs-keyword">this</span>.next = <span class="hljs-literal">null</span>;
+    }
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Table</span> </span>{
+    <span class="hljs-keyword">constructor</span>(size) {
+        <span class="hljs-keyword">this</span>.cells = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(size);
+    }
+
+    hash(key) {
+        <span class="hljs-keyword">let</span> total = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; key.length; i++) {
+            total += key.charCodeAt(i);
+        }
+        <span class="hljs-keyword">return</span> total % <span class="hljs-keyword">this</span>.cells.length;
+    }
+
+    insert(key, value) {
+        <span class="hljs-keyword">const</span> hash = <span class="hljs-keyword">this</span>.hash(key);
+        <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.cells[hash]) {
+            <span class="hljs-keyword">this</span>.cells[hash] = <span class="hljs-keyword">new</span> Node(key, value);
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.cells[hash].key === key) {
+            <span class="hljs-keyword">this</span>.cells[hash].value = value;
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">let</span> node = <span class="hljs-keyword">this</span>.cells[hash];
+            <span class="hljs-keyword">while</span> (node.next) {
+                <span class="hljs-keyword">if</span> (node.next.key === key) {
+                    node.next.value = value;
+                    <span class="hljs-keyword">return</span>;
+                }
+                node = node.next;
+            }
+            node.next = <span class="hljs-keyword">new</span> Node(key, value);
+        }
+    }
+
+    get(key) {
+        <span class="hljs-keyword">const</span> hash = <span class="hljs-keyword">this</span>.hash(key);
+        <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.cells[hash]) {
+             <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">let</span> node = <span class="hljs-keyword">this</span>.cells[hash];
+            <span class="hljs-keyword">while</span> (node) {
+                <span class="hljs-keyword">if</span> (node.key === key) <span class="hljs-keyword">return</span> node.value;
+                node = node.next;
+            }
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+        }
+    }
+
+    getAll() {
+        <span class="hljs-keyword">const</span> table = [];
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-keyword">this</span>.cells.length; i++) {
+            <span class="hljs-keyword">const</span> cell = [];
+            <span class="hljs-keyword">let</span> node = <span class="hljs-keyword">this</span>.cells[i];
+            <span class="hljs-keyword">while</span> (node) {
+                cell.push(node.value);
+                node = node.next;
+            }
+            table.push(cell);
+        }
+        <span class="hljs-keyword">return</span> table;
+    }
+}
+</div></code></pre>
+<h1 id="algorithms">Algorithms</h1>
+<h2 id="random-algorithms">Random algorithms</h2>
+<h3 id="check-prime">Check Prime</h3>
+<p>Function to verify if a number is prime.</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isPrime</span>(<span class="hljs-params">n</span>)</span>{
+  <span class="hljs-keyword">var</span> divisor = <span class="hljs-number">2</span>;
+
+  <span class="hljs-keyword">while</span> (n &gt; divisor){
+    <span class="hljs-keyword">if</span>(n % divisor == <span class="hljs-number">0</span>){
+     <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; 
+    }
+    <span class="hljs-keyword">else</span>
+      divisor++;
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}
+
+&gt; isPrime(<span class="hljs-number">137</span>);
+  = <span class="hljs-literal">true</span>
+&gt; isPrime(<span class="hljs-number">237</span>);
+  = <span class="hljs-literal">false</span>
+</div></code></pre>
+<h3 id="prime-factors">Prime Factors</h3>
+<p>Function finadas all prime factors of a number. Example is <code>O(n)</code>.</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">primeFactors</span>(<span class="hljs-params">n</span>)</span>{
+  <span class="hljs-keyword">var</span> factors = [], 
+      divisor = <span class="hljs-number">2</span>;
+  
+  <span class="hljs-keyword">while</span>(n&gt;<span class="hljs-number">2</span>){
+    <span class="hljs-keyword">if</span>(n % divisor == <span class="hljs-number">0</span>){
+       factors.push(divisor); 
+       n= n/ divisor;
+    }
+    <span class="hljs-keyword">else</span>{
+      divisor++;
+    }     
+  }
+  <span class="hljs-keyword">return</span> factors;
+}
+
+&gt; primeFactors(<span class="hljs-number">69</span>);
+  = [<span class="hljs-number">3</span>, <span class="hljs-number">23</span>]
+</div></code></pre>
+<h3 id="fibonacci">Fibonacci</h3>
+<p>runtime is <code>O(2^n)</code></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fibonacci</span>(<span class="hljs-params">n</span>)</span>{
+  <span class="hljs-keyword">if</span>(n&lt;=<span class="hljs-number">1</span>)
+    <span class="hljs-keyword">return</span> n;
+  <span class="hljs-keyword">else</span>
+    <span class="hljs-keyword">return</span> fibonacci(n<span class="hljs-number">-1</span>) + fibonacci (n<span class="hljs-number">-2</span>);  
+}
+
+&gt; fibonacci(<span class="hljs-number">12</span>);
+  = <span class="hljs-number">144</span>
+</div></code></pre>
+<h3 id="greatest-common-divisor">Greatest Common Divisor</h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">greatestCommonDivisor</span>(<span class="hljs-params">a, b</span>)</span>{
+  <span class="hljs-keyword">var</span> divisor = <span class="hljs-number">2</span>, 
+      greatestDivisor = <span class="hljs-number">1</span>;
+
+  <span class="hljs-comment">//if u pass a -ve number this will not work. fix it dude!!</span>
+  <span class="hljs-keyword">if</span> (a &lt; <span class="hljs-number">2</span> || b &lt; <span class="hljs-number">2</span>)
+     <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+  
+  <span class="hljs-keyword">while</span>(a &gt;= divisor &amp;&amp; b &gt;= divisor){
+   <span class="hljs-keyword">if</span>(a %divisor == <span class="hljs-number">0</span> &amp;&amp; b% divisor ==<span class="hljs-number">0</span>){
+      greatestDivisor = divisor;      
+    }
+   divisor++;
+  }
+  <span class="hljs-keyword">return</span> greatestDivisor;
+}
+
+&gt; greatestCommonDivisor(<span class="hljs-number">14</span>, <span class="hljs-number">21</span>);
+  =<span class="hljs-number">7</span> 
+&gt; greatestCommonDivisor(<span class="hljs-number">69</span>, <span class="hljs-number">169</span>);
+  = <span class="hljs-number">1</span>
+</div></code></pre>
+<h3 id="remove-duplicate-from-array">Remove Duplicate from Array</h3>
+<p>Start a while looping and keep an object/ associated array. If i find an element for the first time i will set its value as true (that will tell me element added once.). if i find a element in the exists object, i will not insert it into the return array.</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">removeDuplicate</span>(<span class="hljs-params">arr</span>)</span>{
+  <span class="hljs-keyword">var</span> exists ={},
+      outArr = [], 
+      elm;
+
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i =<span class="hljs-number">0</span>; i&lt;arr.length; i++){
+    elm = arr[i];
+    <span class="hljs-keyword">if</span>(!exists[elm]){
+      outArr.push(elm);
+      exists[elm] = <span class="hljs-literal">true</span>;
+   }
+  }
+  <span class="hljs-keyword">return</span> outArr;
+}
+
+&gt; removeDuplicate([<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">1</span>]);
+  = [<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>]
+</div></code></pre>
+<h3 id="merge-two-sorted-arrays">Merge Two Sorted Arrays</h3>
+<p>I will keep a pointer for each array and (read the code. and be careful about this one.)</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mergeSortedArray</span>(<span class="hljs-params">a, b</span>)</span>{
+  <span class="hljs-keyword">var</span> merged = [], 
+      aElm = a[<span class="hljs-number">0</span>],
+      bElm = b[<span class="hljs-number">0</span>],
+      i = <span class="hljs-number">1</span>,
+      j = <span class="hljs-number">1</span>;
+  
+  <span class="hljs-keyword">if</span>(a.length ==<span class="hljs-number">0</span>)
+    <span class="hljs-keyword">return</span> b;
+  <span class="hljs-keyword">if</span>(b.length ==<span class="hljs-number">0</span>)
+    <span class="hljs-keyword">return</span> a;
+  <span class="hljs-comment">/* 
+  if aElm or bElm exists we will insert to merged array
+  (will go inside while loop)
+   to insert: aElm exists and bElm doesn't exists
+             or both exists and aElm &lt; bElm
+    this is the critical part of the example            
+  */</span>
+  <span class="hljs-keyword">while</span>(aElm || bElm){
+   <span class="hljs-keyword">if</span>((aElm &amp;&amp; !bElm) || aElm &lt; bElm){
+     merged.push(aElm);
+     aElm = a[i++];
+   }   
+   <span class="hljs-keyword">else</span> {
+     merged.push(bElm);
+     bElm = b[j++];
+   }
+  }
+  <span class="hljs-keyword">return</span> merged;
+}
+
+&gt; mergeSortedArray([<span class="hljs-number">2</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">9</span>], [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">29</span>]);
+ = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">9</span>, <span class="hljs-number">29</span>]
+</div></code></pre>
+<h3 id="swap-number-without-temp">Swap number without temp</h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">swapNumb</span>(<span class="hljs-params">a, b</span>)</span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'before swap: '</span>,<span class="hljs-string">'a: '</span>, a, <span class="hljs-string">'b: '</span>, b);
+  b = b -a;
+  a = a+ b;
+  b = a-b;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'after swap: '</span>,<span class="hljs-string">'a: '</span>, a, <span class="hljs-string">'b: '</span>, b);  
+}
+
+&gt; swapNumb(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>);
+   = before swap:  a:  <span class="hljs-number">2</span> b:  <span class="hljs-number">3</span>
+   = after swap:  a:  <span class="hljs-number">3</span> b:  <span class="hljs-number">2</span> 
+</div></code></pre>
+<h3 id="string-reverse">String Reverse</h3>
+<p><code>O(n)</code></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reverse</span>(<span class="hljs-params">str</span>)</span>{
+  <span class="hljs-keyword">var</span> rtnStr = [];
+  <span class="hljs-keyword">if</span>(!str || <span class="hljs-keyword">typeof</span> str != <span class="hljs-string">'string'</span> || str.length &lt; <span class="hljs-number">2</span> ) <span class="hljs-keyword">return</span> str;
+  
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = str.length<span class="hljs-number">-1</span>; i&gt;=<span class="hljs-number">0</span>;i--){
+    rtnStr.push(str[i]);
+  }
+  <span class="hljs-keyword">return</span> rtnStr.join(<span class="hljs-string">''</span>);
+}
+</div></code></pre>
+<p>Recursive</p>
+<pre class="hljs"><code><div>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reverse</span> (<span class="hljs-params">str</span>) </span>{
+    <span class="hljs-keyword">if</span> (str === <span class="hljs-string">""</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">""</span>;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">return</span> reverse(str.substr(<span class="hljs-number">1</span>)) + str.charAt(<span class="hljs-number">0</span>);
+    }
+}
+</div></code></pre>
+<h3 id="reverse-words">Reverse Words</h3>
+<p>You have to check for white space and walk through the string. Ask is there could be multiple whitespace.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">//have a tailing white space</span>
+<span class="hljs-comment">//fix this later</span>
+<span class="hljs-comment">//now i m sleepy</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reverseWords</span>(<span class="hljs-params">str</span>)</span>{
+<span class="hljs-keyword">var</span> rev = [], 
+    wordLen = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = str.length<span class="hljs-number">-1</span>; i&gt;=<span class="hljs-number">0</span>; i--){
+  <span class="hljs-keyword">if</span>(str[i]==<span class="hljs-string">' '</span> || i==<span class="hljs-number">0</span>){
+    rev.push(str.substr(i,wordLen+<span class="hljs-number">1</span>));
+    wordLen = <span class="hljs-number">0</span>;
+  }
+  <span class="hljs-keyword">else</span>
+    wordLen++;
+}
+<span class="hljs-keyword">return</span> rev.join(<span class="hljs-string">' '</span>);
+}
+</div></code></pre>
+<p>Using built in methods:</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reverseWords</span>(<span class="hljs-params">str</span>)</span>{
+ <span class="hljs-keyword">return</span> str.split(<span class="hljs-string">' '</span>).reverse();
+}
+</div></code></pre>
+<h3 id="reverse-in-place">Reverse in Place</h3>
+<p>To do this, i have to do both string reverse and word reverse.</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reverseInPlace</span>(<span class="hljs-params">str</span>)</span>{
+  <span class="hljs-keyword">return</span> str.split(<span class="hljs-string">' '</span>).reverse().join(<span class="hljs-string">' '</span>).split(<span class="hljs-string">''</span>).reverse().join(<span class="hljs-string">''</span>);
+}
+
+&gt; reverseInPlace(<span class="hljs-string">'I am the good boy'</span>);
+ = <span class="hljs-string">"I ma eht doog yob"</span>
+</div></code></pre>
+<h3 id="first-non-repeating-char">First non repeating char</h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">firstNonRepeatChar</span>(<span class="hljs-params">str</span>)</span>{
+  <span class="hljs-keyword">var</span> len = str.length,
+      char, 
+      charCount = {};
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i =<span class="hljs-number">0</span>; i&lt;len; i++){
+    char = str[i];
+    <span class="hljs-keyword">if</span>(charCount[char]){
+      charCount[char]++;
+    }
+    <span class="hljs-keyword">else</span>
+      charCount[char] = <span class="hljs-number">1</span>;
+  }
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> j <span class="hljs-keyword">in</span> charCount){
+    <span class="hljs-keyword">if</span> (charCount[j]==<span class="hljs-number">1</span>)
+       <span class="hljs-keyword">return</span> j;
+  }
+}  
+
+&gt;firstNonRepeatChar(<span class="hljs-string">'the quick brown fox jumps then quickly blow air'</span>);
+ = <span class="hljs-string">"f"</span>
+</div></code></pre>
+<h3 id="remove-duplicate-char">Remove Duplicate char</h3>
+<pre class="hljs"><code><div>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">removeDuplicateChar</span>(<span class="hljs-params">str</span>)</span>{
+  <span class="hljs-keyword">var</span> len = str.length,
+      char, 
+      charCount = {}, 
+      newStr = [];
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i =<span class="hljs-number">0</span>; i&lt;len; i++){
+    char = str[i];
+    <span class="hljs-keyword">if</span>(charCount[char]){
+      charCount[char]++;
+    }
+    <span class="hljs-keyword">else</span>
+      charCount[char] = <span class="hljs-number">1</span>;
+  }
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> j <span class="hljs-keyword">in</span> charCount){
+    <span class="hljs-keyword">if</span> (charCount[j]==<span class="hljs-number">1</span>)
+       newStr.push(j);
+  }
+  <span class="hljs-keyword">return</span> newStr.join(<span class="hljs-string">''</span>);
+}
+
+&gt; removeDuplicateChar(<span class="hljs-string">'Learn more javascript dude'</span>);
+  = <span class="hljs-string">"Lnmojvsciptu"</span>
+</div></code></pre>
+<p><strong>For case insensitive:</strong> when u r setting property of charCount or increase counter, just make the char.toLowerCase(). or you can do something fancy with charCode (if you can deal with it.)</p>
+<h3 id="check-palindrome">Check Palindrome</h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isPalindrome</span>(<span class="hljs-params">str</span>)</span>{
+  <span class="hljs-keyword">var</span> i, len = str.length;
+  <span class="hljs-keyword">for</span>(i =<span class="hljs-number">0</span>; i&lt;len/<span class="hljs-number">2</span>; i++){
+    <span class="hljs-keyword">if</span> (str[i]!== str[len <span class="hljs-number">-1</span> -i])
+       <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}
+
+&gt; isPalindrome(<span class="hljs-string">'madam'</span>)
+  = <span class="hljs-literal">true</span>
+&gt; isPalindrome(<span class="hljs-string">'toyota'</span>)
+  = <span class="hljs-literal">false</span>
+</div></code></pre>
+<p>Using built in methods:</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">checkPalindrom</span>(<span class="hljs-params">str</span>) </span>{
+    <span class="hljs-keyword">return</span> str == str.split(<span class="hljs-string">''</span>).reverse().join(<span class="hljs-string">''</span>);
+}
+</div></code></pre>
+<h3 id="random-between-5-to-7">Random Between 5 to 7</h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">rand5</span>(<span class="hljs-params"></span>)</span>{
+   <span class="hljs-keyword">return</span> <span class="hljs-number">1</span> + <span class="hljs-built_in">Math</span>.random() * <span class="hljs-number">4</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">rand7</span>(<span class="hljs-params"></span>)</span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-number">5</span> + rand5() / <span class="hljs-number">5</span> * <span class="hljs-number">2</span>;
+}
+</div></code></pre>
+<h3 id="missing-number">Missing Number</h3>
+<p>from a unsorted array of numbers 1 to 100 excluding one number, how will you find that number.</p>
+<p><strong>answer</strong> You have an array of numbers 1 to 100 in an array. Only one number is missing in the array. The array is unsorted. Find the missing number.</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">missingNumber</span>(<span class="hljs-params">arr</span>)</span>{
+  <span class="hljs-keyword">var</span> n = arr.length+<span class="hljs-number">1</span>, 
+  sum = <span class="hljs-number">0</span>,
+  expectedSum = n* (n+<span class="hljs-number">1</span>)/<span class="hljs-number">2</span>;
+  
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, len = arr.length; i &lt; len; i++){
+    sum += arr[i];
+  }
+  
+  <span class="hljs-keyword">return</span> expectedSum - sum;
+}
+
+&gt; missingNumber([<span class="hljs-number">5</span>, <span class="hljs-number">2</span>, <span class="hljs-number">6</span>, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>]);
+  = <span class="hljs-number">4</span>
+</div></code></pre>
+<h3 id="sum-of-two">Sum of Two</h3>
+<p>From a unsorted array, check whether there are any two numbers that will sum up to a given number?</p>
+<p><code>O(n^2)</code></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sumFinder</span>(<span class="hljs-params">arr, sum</span>)</span>{
+  <span class="hljs-keyword">var</span> len = arr.length;
+  
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i =<span class="hljs-number">0</span>; i&lt;len<span class="hljs-number">-1</span>; i++){  
+     <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> j = i+<span class="hljs-number">1</span>;j&lt;len; j++){
+        <span class="hljs-keyword">if</span> (arr[i] + arr[j] == sum)
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+     }
+  }
+  
+  <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+}
+
+&gt; sumFinder([<span class="hljs-number">6</span>,<span class="hljs-number">4</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">7</span>], <span class="hljs-number">9</span>);
+  = <span class="hljs-literal">true</span>
+&gt; sumFinder([<span class="hljs-number">6</span>,<span class="hljs-number">4</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">7</span>], <span class="hljs-number">2</span>);
+  = <span class="hljs-literal">false</span>
+</div></code></pre>
+<p>Better because I can have an object where i will store the difference of sum and element. And then when i get to a new element and if i find the difference is the object, then i have a pair that sums up to the desired sum.</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sumFinder</span>(<span class="hljs-params">arr, sum</span>)</span>{
+  <span class="hljs-keyword">var</span> differ = {}, 
+      len = arr.length,
+      substract;
+  
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i =<span class="hljs-number">0</span>; i&lt;len; i++){
+     substract = sum - arr[i];
+
+     <span class="hljs-keyword">if</span>(differ[substract])
+       <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;       
+     <span class="hljs-keyword">else</span>
+       differ[arr[i]] = <span class="hljs-literal">true</span>;
+  }
+  
+  <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+}
+
+&gt; sumFinder([<span class="hljs-number">6</span>,<span class="hljs-number">4</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">7</span>], <span class="hljs-number">9</span>);
+  = <span class="hljs-literal">true</span>
+&gt; sumFinder([<span class="hljs-number">6</span>,<span class="hljs-number">4</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">7</span>], <span class="hljs-number">2</span>);
+  = <span class="hljs-literal">false</span>
+</div></code></pre>
+<h3 id="largest-sum">Largest Sum</h3>
+<p>How would you find the largest sum of any two elements?</p>
+<p><strong>answer</strong>: Just find the two largest number and return sum of them</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">topSum</span>(<span class="hljs-params">arr</span>)</span>{
+  
+  <span class="hljs-keyword">var</span> biggest = arr[<span class="hljs-number">0</span>], 
+      second = arr[<span class="hljs-number">1</span>], 
+      len = arr.length, 
+      i = <span class="hljs-number">2</span>;
+
+  <span class="hljs-keyword">if</span> (len&lt;<span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+  
+  <span class="hljs-keyword">if</span> (biggest&lt;second){
+    biggest = arr[<span class="hljs-number">1</span>];
+    second = arr[<span class="hljs-number">0</span>];
+  } 
+  
+  <span class="hljs-keyword">for</span>(; i&lt;len; i++){
+
+   <span class="hljs-keyword">if</span>(arr[i] &gt; biggest){
+      second = biggest;
+      biggest = arr[i];
+    }
+   <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (arr[i]&gt;second){
+      second = arr[i];
+   }
+    
+ }
+ <span class="hljs-keyword">return</span> biggest + second;
+}
+</div></code></pre>
+<h3 id="counting-zeros">Counting Zeros</h3>
+<p>Count Total number of zeros from 1 upto n?</p>
+<p>If n = 50. number of 0 would be 11 (0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100). Please note that 100 has two 0. This one looks simple but little tricky. So the tick here is. if you have a number 1 to 50 the value is 5. just 50 divided by 10. However, if the value is 100. the value is 11. you will get by 100/10 = 10 and 10/10. Thats how you will get in the more zeros in one number like (100, 200, 1000)</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">countZero</span>(<span class="hljs-params">n</span>)</span>{
+  <span class="hljs-keyword">var</span> count = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">while</span>(n&gt;<span class="hljs-number">0</span>){
+   count += <span class="hljs-built_in">Math</span>.floor(n/<span class="hljs-number">10</span>);
+   n = n/<span class="hljs-number">10</span>;
+  }
+  <span class="hljs-keyword">return</span> count;
+}
+
+&gt; countZero(<span class="hljs-number">2014</span>);
+  = <span class="hljs-number">223</span>
+</div></code></pre>
+<h3 id="substring">Substring</h3>
+<p>Will use to pointer (one for string and another for the substring) while iterating the string. And will have another variable to hold the starting index of the initial match.</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">subStringFinder</span>(<span class="hljs-params">str, subStr</span>)</span>{
+  <span class="hljs-keyword">var</span> idx = <span class="hljs-number">0</span>,
+      i = <span class="hljs-number">0</span>,
+      j = <span class="hljs-number">0</span>,
+      len = str.length,
+      subLen = subStr.length;
+
+   <span class="hljs-keyword">for</span>(; i&lt;len; i++){
+   
+      <span class="hljs-keyword">if</span>(str[i] == subStr[j])
+         j++;
+      <span class="hljs-keyword">else</span>
+         j = <span class="hljs-number">0</span>;
+      
+      <span class="hljs-comment">//check starting point or a match   </span>
+      <span class="hljs-keyword">if</span>(j == <span class="hljs-number">0</span>)
+        idx = i;
+      <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (j == subLen)
+        <span class="hljs-keyword">return</span> idx;
+  }
+
+  <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+}
+
+&gt; subStringFinder(<span class="hljs-string">'abbcdabbbbbck'</span>, <span class="hljs-string">'ab'</span>)
+  = <span class="hljs-number">0</span>
+&gt; subStringFinder(<span class="hljs-string">'abbcdabbbbbck'</span>, <span class="hljs-string">'bck'</span>)
+  = <span class="hljs-number">9</span>
+
+<span class="hljs-comment">//doesn't work for this one.</span>
+&gt; subStringFinder(<span class="hljs-string">'abbcdabbbbbck'</span>, <span class="hljs-string">'bbbck'</span>)  
+  = <span class="hljs-number">-1</span>
+</div></code></pre>
+<h3 id="permutations">Permutations</h3>
+<p>How would you create all permutation of a string?</p>
+<ul>
+<li>Idea: Idea is very simple. We will convert the string to an array. from the array we will pick one character and then permute rest of it. After getting the permutation of the rest of the characters, we will concatenate each of them with the character we have picked.</li>
+<li>step-1 First copy original array to avoid changing it while picking elements</li>
+<li>step-2 Use splice to removed element from the copied array. We copied the array because splice will remove the item from the array. We will need the picked item in the next iteration.</li>
+<li>step-3 [1,2,3,4].splice(2,1) will return [3] and remaining array = [1,2,4]</li>
+<li>step-4 Use recursive method to get the permutation of the rest of the elements by passing array as string</li>
+<li>step-5 Finally, concat like a+permute(bc) for each</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">permutations</span>(<span class="hljs-params">str</span>)</span>{
+<span class="hljs-keyword">var</span> arr = str.split(<span class="hljs-string">''</span>),
+    len = arr.length, 
+    perms = [],
+    rest,
+    picked,
+    restPerms,
+    next;
+
+    <span class="hljs-keyword">if</span> (len == <span class="hljs-number">0</span>)
+        <span class="hljs-keyword">return</span> [str];
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i=<span class="hljs-number">0</span>; i&lt;len; i++)
+    {
+        rest = <span class="hljs-built_in">Object</span>.create(arr);
+        picked = rest.splice(i, <span class="hljs-number">1</span>);
+
+        restPerms = permutations(rest.join(<span class="hljs-string">''</span>));
+
+       <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> j=<span class="hljs-number">0</span>, jLen = restPerms.length; j&lt; jLen; j++)
+       {
+           next = picked.concat(restPerms[j]);
+           perms.push(next.join(<span class="hljs-string">''</span>));
+       }
+    }
+   <span class="hljs-keyword">return</span> perms;
+}
+</div></code></pre>
+<h2 id="sorting-algorithms">Sorting Algorithms</h2>
+<h3 id="bubble-sort">Bubble Sort</h3>
+<ul>
+<li>
+<p>step-1: you compare the first item with the second. If the first item is bigger than the second item. you swap them so that the bigger one stays in the second position.</p>
+</li>
+<li>
+<p>step-2:And then compare second with third item. if second item is bigger than the third, we swap them. otherwise, they stayed in their position. Hence, the biggest among first three is in the third position.</p>
+</li>
+<li>
+<p>step-3:we keep doing it. until we hit the last element of the array. In that way we bubble up the biggest item of the array to the right most position of the array.</p>
+</li>
+<li>
+<p>step-4: Look at the inner loop in the code below.</p>
+</li>
+<li>
+<p>step-5: We repeat this process, starting from the last item of the array. look at the outer loop in the code below. We do this way, so that after finishing the first inner loop, the biggest one will be in the last item of the array.</p>
+</li>
+<li>
+<p>step-6: and then we move backward inside the outer loop.</p>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bubbleSort</span>(<span class="hljs-params">arr</span>)</span>{
+   <span class="hljs-keyword">var</span> len = arr.length;
+   <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = len<span class="hljs-number">-1</span>; i&gt;=<span class="hljs-number">0</span>; i--){
+     <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> j = <span class="hljs-number">1</span>; j&lt;=i; j++){
+       <span class="hljs-keyword">if</span>(arr[j<span class="hljs-number">-1</span>]&gt;arr[j]){
+           <span class="hljs-keyword">var</span> temp = arr[j<span class="hljs-number">-1</span>];
+           arr[j<span class="hljs-number">-1</span>] = arr[j];
+           arr[j] = temp;
+        }
+     }
+   }
+   <span class="hljs-keyword">return</span> arr;
+}
+bubbleSort([<span class="hljs-number">7</span>,<span class="hljs-number">5</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,<span class="hljs-number">3</span>,<span class="hljs-number">9</span>]); <span class="hljs-comment">//[2, 3, 4, 5, 7, 9]</span>
+bubbleSort([<span class="hljs-number">9</span>,<span class="hljs-number">7</span>,<span class="hljs-number">5</span>,<span class="hljs-number">4</span>,<span class="hljs-number">3</span>,<span class="hljs-number">1</span>]); <span class="hljs-comment">//[1, 3, 4, 5, 7, 9]</span>
+bubbleSort([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]); <span class="hljs-comment">//[1, 2, 3, 4, 5, 6]</span>
+</div></code></pre>
+<h3 id="selection-sort">Selection Sort</h3>
+<p>Go through the array, find the index of the lowest element swap the lowest element with the first element. Hence first element is the lowest element in the array.</p>
+<p>Now go through the rest of the array (excluding the first element) and find the index of the lowest and swap it with the second element.</p>
+<p>thats how it continues to select (find out) the lowest element of the array and putting it on the left until it hits the last element.</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">selectionSort</span>(<span class="hljs-params">arr</span>)</span>{
+  <span class="hljs-keyword">var</span> minIdx, temp, 
+      len = arr.length;
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; len; i++){
+    minIdx = i;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span>  j = i+<span class="hljs-number">1</span>; j&lt;len; j++){
+       <span class="hljs-keyword">if</span>(arr[j]&lt;arr[minIdx]){
+          minIdx = j;
+       }
+    }
+    temp = arr[i];
+    arr[i] = arr[minIdx];
+    arr[minIdx] = temp;
+  }
+  <span class="hljs-keyword">return</span> arr;
+}
+</div></code></pre>
+<h3 id="insertion-sort">Insertion Sort</h3>
+<p>Imagine you are playing cards. Somebody is giving you cards one by one. When you are receiving card, you are planning to put them in a way so that the smaller one is on the left. This means you want to insert them in a sorted way</p>
+<ul>
+<li>
+<p>step-1: If the first card you are getting is 5. Just hold the card in your hand. you dont have to do anything.</p>
+</li>
+<li>
+<p>step-2: If the second card is 2, you want to put it before 5 so that the two cards you have are sorted. When you are putting the card with number 2 at the left, you are changing the position of the card 5 from first position to second position. And then first position becomes available and you put 2 there.</p>
+</li>
+<li>
+<p>step-3: If the third card is 4. you will start from second position. In the second position, you have card 5 which is bigger than 4. Hence you will move 5 to the third position. The next card to the left is 2 which is smaller than 4. Hence, you wont move 2. And you will insert card 4 in the second position.</p>
+</li>
+<li>
+<p>step-4: Then you got 10. It is bigger than the previous card which is 5. Hence, you just add it at the last position.</p>
+</li>
+<li>
+<p>step-5: The next card is 7. You just move the position of the card 10 to the right and insert card 7.</p>
+</li>
+<li>
+<p>step-6: If the last card is 3. You will have to move 10 to the right as it is bigger than 3. and then you check with the next card to the left it is 7 which is bigger than 3. you move it to the right. similarly, you move 5, 4 to the right. And put the number 3 before 2 as 2 is smaller than 3.</p>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">insertionSort</span>(<span class="hljs-params">arr</span>)</span>{
+  <span class="hljs-keyword">var</span> i, len = arr.length, el, j;
+
+  <span class="hljs-keyword">for</span>(i = <span class="hljs-number">1</span>; i&lt;len; i++){
+    el = arr[i];
+    j = i;
+
+    <span class="hljs-keyword">while</span>(j&gt;<span class="hljs-number">0</span> &amp;&amp; arr[j<span class="hljs-number">-1</span>]&gt;toInsert){
+      arr[j] = arr[j<span class="hljs-number">-1</span>];
+      j--;
+   }
+
+   arr[j] = el;
+  }
+
+  <span class="hljs-keyword">return</span> arr;
+}
+</div></code></pre>
+<h3 id="merge-sort">Merge Sort</h3>
+<p>just break down your array into small and small pieces and until you have one items in each pieces. then merge together by comparing them. If you still have hard time to figure out what i am talking about, look at merge sort gif taken from wikipedia</p>
+<p>Code Merge Sort: Merge sort has two parts. Main part does divide or breaks down and second part is merging/combining parts. At the time of combining, parts are combined together.</p>
+<p>Divide: the first function named as mergeSort is actually a divide function. where an array is divided into two.</p>
+<p>merge: this is just merging two sorted array. Just be careful this two array could be in different size</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mergeSort</span>(<span class="hljs-params">arr</span>)</span>{
+   <span class="hljs-keyword">var</span> len = arr.length;
+   <span class="hljs-keyword">if</span>(len &lt;<span class="hljs-number">2</span>)
+      <span class="hljs-keyword">return</span> arr;
+   <span class="hljs-keyword">var</span> mid = <span class="hljs-built_in">Math</span>.floor(len/<span class="hljs-number">2</span>),
+       left = arr.slice(<span class="hljs-number">0</span>,mid),
+       right =arr.slice(mid);
+   <span class="hljs-comment">//send left and right to the mergeSort to broke it down into pieces</span>
+   <span class="hljs-comment">//then merge those</span>
+   <span class="hljs-keyword">return</span> merge(mergeSort(left),mergeSort(right));
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">merge</span>(<span class="hljs-params">left, right</span>)</span>{
+  <span class="hljs-keyword">var</span> result = [],
+      lLen = left.length,
+      rLen = right.length,
+      l = <span class="hljs-number">0</span>,
+      r = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">while</span>(l &lt; lLen &amp;&amp; r &lt; rLen){
+     <span class="hljs-keyword">if</span>(left[l] &lt; right[r]){
+       result.push(left[l++]);
+     }
+     <span class="hljs-keyword">else</span>{
+       result.push(right[r++]);
+    }
+  }  
+  <span class="hljs-comment">//remaining part needs to be addred to the result</span>
+  <span class="hljs-keyword">return</span> result.concat(left.slice(l)).concat(right.slice(r));
+}
+</div></code></pre>
+<h3 id="quick-sort">Quick Sort</h3>
+<ul>
+<li>
+<p>Step-1: You have to pick a pivot. This could be randomly selected or the middle one. Here we select the last element of the array.</p>
+</li>
+<li>
+<p>Step-2: Put all the items smaller than the pivot value to the left and larger than the pivot value to the right.</p>
+</li>
+<li>
+<p>Step-3:Repeat the step-2 for both left and right side of the pivot (pick a pivot, put all item smaller than the pivot to the left and larger on the right)</p>
+</li>
+</ul>
+<p><strong>Call Quick sort:</strong> Pass the array and pass left and right to the quickSort function. For the first call, left would be the index of the first element which is 0 and right would be the index of the last element which would be length -1.</p>
+<p><strong>Select Pivot:</strong> We select pivot as the last index of the array.</p>
+<p><strong>Call Partition function:</strong> After calculating the pivot, we send the pivot to the partition function. In the partition function we pass array, pivot index, left and right.</p>
+<p><strong>partitionIndex:</strong> In the partition function, we keep move all the items smaller than the pivot value to the left and larger than pivot value to the right. We have to keep track of the position of the partition. so that we can split the array into two parts in the next step. This tracking of the index where we partition the array is done by using partitionIndex variable. the initial value is left.</p>
+<p><strong>Swap function:</strong> This is just a helper function to swap values of the array.</p>
+<p><strong>move elements:</strong> we start a for loop from the left, and if the values is smaller than the pivot values we swap it with the position of the partitionIndex and increase the value of the partitionIndex. If the value is bigger, we don't do anything. We keep going until the element before the last element (remember last element is the pivot)</p>
+<p><strong>place pivot</strong> After moving all the smallest element to the left, we swap the last element (pivot value) with the partitionIndex. By doing this, the pivot sits where it suppose to sit when the full array is sorted. As all elements left to it smaller and all element right to it is bigger. End of the function partition, return the partitionIndex</p>
+<p><strong>Repeat the process:</strong> Now come back to quickSort function. when you get the partitionIndex, apply quickSort for the left side of the array and right side of the array. keep doing it until left is smaller than right.</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">quickSort</span>(<span class="hljs-params">arr, left, right</span>)</span>{
+   <span class="hljs-keyword">var</span> len = arr.length, 
+   pivot,
+   partitionIndex;
+
+
+  <span class="hljs-keyword">if</span>(left &lt; right){
+    pivot = right;
+    partitionIndex = partition(arr, pivot, left, right);
+    
+   <span class="hljs-comment">//sort left and right</span>
+   quickSort(arr, left, partitionIndex - <span class="hljs-number">1</span>);
+   quickSort(arr, partitionIndex + <span class="hljs-number">1</span>, right);
+  }
+  <span class="hljs-keyword">return</span> arr;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">partition</span>(<span class="hljs-params">arr, pivot, left, right</span>)</span>{
+   <span class="hljs-keyword">var</span> pivotValue = arr[pivot],
+       partitionIndex = left;
+
+   <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = left; i &lt; right; i++){
+    <span class="hljs-keyword">if</span>(arr[i] &lt; pivotValue){
+      swap(arr, i, partitionIndex);
+      partitionIndex++;
+    }
+  }
+  swap(arr, right, partitionIndex);
+  <span class="hljs-keyword">return</span> partitionIndex;
+}
+
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">swap</span>(<span class="hljs-params">arr, i, j</span>)</span>{
+   <span class="hljs-keyword">var</span> temp = arr[i];
+   arr[i] = arr[j];
+   arr[j] = temp;
+}
+
+
+</div></code></pre>
+<h3 id="heap-sort">Heap Sort</h3>
+<p>first step is to build an heap. That is done in the heapify function. Hepaify put the largest element at the root.</p>
+<pre class="hljs"><code><div>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">heapSort</span>(<span class="hljs-params">arr</span>)</span>{
+  <span class="hljs-keyword">var</span> len = arr.length,
+      end = len<span class="hljs-number">-1</span>;
+
+  heapify(arr, len);
+  
+  <span class="hljs-keyword">while</span>(end &gt; <span class="hljs-number">0</span>){
+   swap(arr, end--, <span class="hljs-number">0</span>);
+   siftDown(arr, <span class="hljs-number">0</span>, end);
+  }
+  <span class="hljs-keyword">return</span> arr;
+}
+     
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">heapify</span>(<span class="hljs-params">arr, len</span>)</span>{
+   <span class="hljs-comment">// break the array into root + two sides, to create tree (heap)</span>
+   <span class="hljs-keyword">var</span> mid = <span class="hljs-built_in">Math</span>.floor((len<span class="hljs-number">-2</span>)/<span class="hljs-number">2</span>);
+   <span class="hljs-keyword">while</span>(mid &gt;= <span class="hljs-number">0</span>){
+    siftDown(arr, mid--, len<span class="hljs-number">-1</span>);    
+  }
+}
+
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">siftDown</span>(<span class="hljs-params">arr, start, end</span>)</span>{
+   <span class="hljs-keyword">var</span> root = start,
+       child = root*<span class="hljs-number">2</span> + <span class="hljs-number">1</span>,
+       toSwap = root;
+   <span class="hljs-keyword">while</span>(child &lt;= end){
+      <span class="hljs-keyword">if</span>(arr[toSwap] &lt; arr[child]){
+        swap(arr, toSwap, child);
+      }
+      <span class="hljs-keyword">if</span>(child+<span class="hljs-number">1</span> &lt;= end &amp;&amp; arr[toSwap] &lt; arr[child+<span class="hljs-number">1</span>]){
+        swap(arr, toSwap, child+<span class="hljs-number">1</span>)
+      }
+      <span class="hljs-keyword">if</span>(toSwap != root){
+         swap(arr, root, toSwap);
+         root = toSwap;
+      }
+      <span class="hljs-keyword">else</span>{
+         <span class="hljs-keyword">return</span>; 
+      }
+      toSwap = root;
+      child = root*<span class="hljs-number">2</span>+<span class="hljs-number">1</span>
+  }
+}
+
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">swap</span>(<span class="hljs-params">arr, i, j</span>)</span>{
+  <span class="hljs-keyword">var</span> temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
+}
+</div></code></pre>
+<h1 id="data-structures">Data Structures</h1>
+<h2 id="singleton">Singleton</h2>
+<p>The Singleton pattern is used to restrict instantiation of a class
+to a single object throughout the entire codebase.</p>
+<p><strong>Idea:</strong> create a class with a method that creates a new instance of the
+class if one doesn't exist. If the instance exist, it will return a
+reference to that object.</p>
+<p><strong>Advantages:</strong></p>
+<ul>
+<li>Allows us to have a single instance of a resource which we can
+manage throughout the codebase.</li>
+</ul>
+<p><strong>Disadvantages:</strong></p>
+<ul>
+<li>Are a global instance, so they hide dependencies of your application
+instead of exposing them though interfaces.</li>
+<li>Violate single responsibility principle, because they control their
+own life cycle.</li>
+<li>Cause code to be tightly coupled (hard to mock in a test)</li>
+<li>Carry state around for the entire lifetime of the application. (
+also an issue when testing because test would need to be ordered,
+which is a big no-no because unit test should be independent
+of each other)</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> Singleton = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-keyword">var</span> instance;
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">init</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-comment">/*
+         Here is where all the var/func of the singleton go. It is very similar 
+         to a module in its structure.
+        */</span>
+        <span class="hljs-keyword">var</span> privateVariable = <span class="hljs-string">'private'</span>;
+        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">privateFunc</span>(<span class="hljs-params">message</span>) </span>{
+            <span class="hljs-built_in">console</span>.log(message);
+        }
+
+        <span class="hljs-keyword">return</span> {
+            <span class="hljs-attr">publicVariable</span>: <span class="hljs-string">'public'</span>,
+            <span class="hljs-attr">publicFunc</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">message</span>) </span>{
+                privateFunc(message);
+            }
+        };
+    }
+
+    <span class="hljs-comment">// Main part of singleton. Test if instance exist if not create one else </span>
+    <span class="hljs-comment">// return reference to the instance.</span>
+    <span class="hljs-keyword">return</span> {
+        <span class="hljs-attr">getInstance</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">if</span> (!instance) {
+                instance = init();
+            }
+            <span class="hljs-keyword">return</span> instance;
+        }
+    };
+})();
+
+<span class="hljs-keyword">var</span> singleton = Singleton.getInstance();
+singleton.publicFunc(<span class="hljs-string">'this is a singleton'</span>);
+</div></code></pre>
+<h2 id="object-literal">Object Literal</h2>
+<p>Modules help keep units of code separated and organized.
+One way to accomplish this is known as an object literal. The
+idea is that we declare our module as an object bound to some
+variable.</p>
+<p>It provides some encapsulation, however it does not provide
+private encapsulation.</p>
+<p>Use cases:</p>
+<ul>
+<li>to prevent polluting the global namespace</li>
+<li>When you have a set of methods you would like to
+reuse</li>
+<li>When you do not require private methods</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> objectLiteral= {
+    <span class="hljs-attr">prop</span>: <span class="hljs-string">"example-property"</span>,
+    <span class="hljs-attr">getter</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.prop;
+    },
+    <span class="hljs-attr">setter</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">prop</span>) </span>{
+        <span class="hljs-keyword">this</span>.prop = prop;
+    },
+    <span class="hljs-attr">foo</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'some other function'</span>);
+    }
+};
+
+objectLiteral.setter(<span class="hljs-string">'new-prop'</span>);
+<span class="hljs-built_in">console</span>.log(objectLiteral.getter());
+</div></code></pre>
+<h2 id="module">Module</h2>
+<p>The Module pattern allows use to further emulate the concepts of
+public/private methods and variables.</p>
+<p>It encapsulates privacy, state and organization through the use of
+closures.</p>
+<p>In JavaScript no true privacy exist, however Within the Module
+pattern we are able to expose the methods we want. This is
+because variables and methods declared in the module are only
+accessible within the module, while the methods defined within
+the returning object are available to everyone.</p>
+<p>So the idea is that the returning object describes the public
+interface.</p>
+<p><strong>Advantages:</strong></p>
+<ul>
+<li>Brings classical OOP encapsulation to JavaScript.</li>
+<li>We get private data!</li>
+</ul>
+<p><strong>Disadvantages:</strong></p>
+<ul>
+<li>If we wish to later change visibility, we will have to
+make changes were each member is used.</li>
+<li>Cannot access private members in methods that are added
+later (if extending module outside its definition).</li>
+<li>Difficult to unit test private members.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> <span class="hljs-built_in">module</span> = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-comment">// Private var/func</span>
+    <span class="hljs-keyword">var</span> privateVariable = <span class="hljs-string">'private'</span>;
+    <span class="hljs-keyword">var</span> privateFunc = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">message</span>) </span>{
+        <span class="hljs-built_in">console</span>.log(message);
+    }
+    <span class="hljs-comment">//public var/func</span>
+    <span class="hljs-keyword">return</span> {
+        <span class="hljs-attr">publicVariable</span>: <span class="hljs-string">'public'</span>,
+        <span class="hljs-comment">// Public function accessing private function</span>
+        publicFunction: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">message</span>) </span>{
+            privateFunc(message);
+        }
+    };
+
+})();
+
+<span class="hljs-comment">/*
+    It is also possible to import into to our modules. This is 
+    good when you want your module to access something like JQuery
+*/</span>
+
+<span class="hljs-keyword">var</span> mixinModule = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">External</span>) </span>{
+    <span class="hljs-keyword">var</span> privateFunc = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">innerHtml</span>)</span>{
+        External(<span class="hljs-string">"#container"</span>).html(innerHtml);
+    }
+    <span class="hljs-keyword">return</span> {
+        <span class="hljs-attr">publicFunc</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">innerHtml</span>)</span>{
+            privateFunc(innerHtml);
+        }
+    };
+})(jQuery);
+</div></code></pre>
+<h2 id="revealing-module">Revealing Module</h2>
+<p>The revealing Module pattern is a slightly improved version of the
+Module pattern. It is more of a shorthand that saves repeating
+the name of the main object when calling public methods from another,
+and prevents switching to object literal notation for things one would
+make public</p>
+<p>The idea is to define all variables and methods (both private and
+public) in the private scope and return an anonymous object with
+pointers to what you wish to make public</p>
+<p><strong>Advantages:</strong></p>
+<ul>
+<li>cleaner syntax</li>
+</ul>
+<p><strong>Disadvantages:</strong></p>
+<ul>
+<li>If a private function refers to a public function, the public
+function cannot be overridden at a later time.</li>
+<li>Therefore, can be more fragile than the Module pattern.</li>
+</ul>
+<h2 id="abstract-factory">Abstract Factory</h2>
+<p>Abstract factory is a factory pattern that aims to separate the details
+of implementation of a set of objects.</p>
+<p>It should be used when the system is required to be independent from
+the way objects are created or if it is creating different types of
+objects.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Setting up some objects using prototype pattern</span>
+
+<span class="hljs-keyword">var</span> Npc = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">this</span>.talk = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'dialog'</span>);
+    };
+    <span class="hljs-keyword">this</span>.attack = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'combat'</span>);
+    };
+    <span class="hljs-keyword">this</span>.move = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'movement'</span>);
+    };
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Knight</span> (<span class="hljs-params">options</span>) </span>{
+    <span class="hljs-keyword">this</span>.health = options.health || <span class="hljs-number">100</span>;
+    <span class="hljs-keyword">this</span>.level = options.level || <span class="hljs-number">10</span>;
+    <span class="hljs-keyword">this</span>.name = options.name || <span class="hljs-string">'level '</span>+ <span class="hljs-keyword">this</span>.level + <span class="hljs-string">' knight'</span>;
+    <span class="hljs-keyword">this</span>.armorType = options.armorType || <span class="hljs-string">'heavy'</span>;
+    <span class="hljs-keyword">this</span>.weapon = options.weapon || <span class="hljs-string">'sword'</span>;
+}
+
+Knight.prototype = <span class="hljs-keyword">new</span> Npc();
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Mage</span> (<span class="hljs-params">options</span>) </span>{
+    <span class="hljs-keyword">this</span>.health = options.health || <span class="hljs-number">100</span>;
+    <span class="hljs-keyword">this</span>.level = options.level || <span class="hljs-number">10</span>;
+    <span class="hljs-keyword">this</span>.name = options.name || <span class="hljs-string">'level '</span>+ <span class="hljs-keyword">this</span>.level + <span class="hljs-string">' mage'</span>;
+    <span class="hljs-keyword">this</span>.spells = options.spells || [<span class="hljs-string">'magic missle'</span>, <span class="hljs-string">'fireball'</span>];
+}
+
+Mage.prototype = <span class="hljs-keyword">new</span> Npc();
+
+<span class="hljs-comment">// The factory implementation</span>
+
+<span class="hljs-keyword">var</span> AbstractNpcFactory = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">factory</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">var</span> types = {};
+        <span class="hljs-keyword">return</span> {
+            <span class="hljs-attr">create</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">type, options</span>) </span>{
+                <span class="hljs-keyword">var</span> NpcClass = types[type];
+                <span class="hljs-keyword">return</span> (NpcClass ? <span class="hljs-keyword">new</span> NpcClass(options) : <span class="hljs-literal">null</span>);
+            },
+            <span class="hljs-attr">register</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">type, NpcClass</span>) </span>{
+                <span class="hljs-comment">// Criteria to allow registeration</span>
+                <span class="hljs-keyword">var</span> proto = NpcClass.prototype;
+                <span class="hljs-keyword">if</span>(proto <span class="hljs-keyword">instanceof</span> Npc) {
+                    types[type] = NpcClass;
+                }
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+            }
+        };
+    }
+    <span class="hljs-keyword">return</span> factory;
+})();
+
+abstractNpcFactory = <span class="hljs-keyword">new</span> AbstractNpcFactory();
+abstractNpcFactory.register(<span class="hljs-string">'knight'</span>, Knight);
+abstractNpcFactory.register(<span class="hljs-string">'mage'</span>, Mage);
+
+<span class="hljs-keyword">var</span> mage = abstractNpcFactory.create(<span class="hljs-string">'mage'</span>, {
+    <span class="hljs-attr">npcType</span>: <span class="hljs-string">'mage'</span>,
+    <span class="hljs-attr">health</span>: <span class="hljs-number">400</span>,
+    <span class="hljs-attr">spells</span>: [<span class="hljs-string">'frost nova'</span>, <span class="hljs-string">'firestorm'</span>, <span class="hljs-string">'chain lighting'</span>],
+    <span class="hljs-attr">level</span>: <span class="hljs-number">32</span>
+});
+
+<span class="hljs-built_in">console</span>.log(mage);
+
+<span class="hljs-keyword">var</span> knight = abstractNpcFactory.create(<span class="hljs-string">'knight'</span>, {
+    <span class="hljs-attr">npcType</span>: <span class="hljs-string">'knight'</span>,
+    <span class="hljs-attr">health</span>: <span class="hljs-number">800</span>,
+    <span class="hljs-attr">weapon</span>: <span class="hljs-string">'battle axe'</span>,
+    <span class="hljs-attr">level</span>: <span class="hljs-number">41</span>,
+})
+
+<span class="hljs-built_in">console</span>.log(knight);
+</div></code></pre>
+<h2 id="command">Command</h2>
+<p>The command pattern is good for encapsulating operations into a single
+object. They help decouple objects that invoke the operation from the
+object that executes the operation. Additionally it allows for the
+creation of a sequence of commands using a queue system.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Command invoker</span>
+CommandManager = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">manager</span> (<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">var</span> _commands = [];
+        <span class="hljs-keyword">return</span> {
+            <span class="hljs-attr">executeCommand</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">command</span>)</span>{
+                _commands.push(command);
+                command.execute();
+            },
+            <span class="hljs-attr">history</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+                <span class="hljs-keyword">return</span> _commands;
+            }
+        };
+    }
+    <span class="hljs-keyword">return</span> manager;
+})();
+
+
+<span class="hljs-comment">// Objects which receive the commands. In this example we </span>
+<span class="hljs-comment">// have an on and off switch and a volume knob</span>
+
+<span class="hljs-keyword">var</span> OnOffSwitch = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onOffSwitch</span>(<span class="hljs-params"></span>)</span>{
+        <span class="hljs-keyword">return</span> {
+            <span class="hljs-attr">turnOn</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'is on'</span>);
+            },
+            <span class="hljs-attr">turnOff</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'is off'</span>);
+            }
+        };
+    }
+    <span class="hljs-keyword">return</span> onOffSwitch;
+})();
+
+<span class="hljs-keyword">var</span> VolumeKnob = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">volume</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">var</span> volume = <span class="hljs-number">10</span>;
+        <span class="hljs-keyword">return</span> {
+            <span class="hljs-attr">turnUp</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+                volume++;
+                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'the volume has been turned up to'</span>, volume);
+            },
+            <span class="hljs-attr">turnDown</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+                volume--;
+                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'the volume has been turned down to'</span>, volume);
+            }
+        }
+    }
+    <span class="hljs-keyword">return</span> volume;
+})();
+
+<span class="hljs-comment">// Concete commands</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">SwitchOnCommand</span> (<span class="hljs-params">onOffSwitch</span>) </span>{
+    <span class="hljs-keyword">this</span>.onOffSwitch = onOffSwitch;
+}
+SwitchOnCommand.prototype.execute = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-keyword">this</span>.onOffSwitch.turnOn();
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">SwitchOffCommand</span> (<span class="hljs-params">onOffSwitch</span>) </span>{
+    <span class="hljs-keyword">this</span>.onOffSwitch = onOffSwitch;
+}
+SwitchOffCommand.prototype.execute = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-keyword">this</span>.onOffSwitch.turnOff();
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">VolumeUpCommand</span> (<span class="hljs-params">volume</span>) </span>{
+    <span class="hljs-keyword">this</span>.volume = volume;
+}
+VolumeUpCommand.prototype.execute = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-keyword">this</span>.volume.turnUp();
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">VolumeDownCommand</span> (<span class="hljs-params">volume</span>) </span>{
+    <span class="hljs-keyword">this</span>.volume = volume;
+}
+VolumeDownCommand.prototype.execute = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-keyword">this</span>.volume.turnDown();
+}
+
+<span class="hljs-comment">// Demo</span>
+
+<span class="hljs-keyword">var</span> manager = <span class="hljs-keyword">new</span> CommandManager();
+<span class="hljs-keyword">var</span> onOffSwitch = <span class="hljs-keyword">new</span> OnOffSwitch();
+<span class="hljs-keyword">var</span> volume = <span class="hljs-keyword">new</span> VolumeKnob();
+
+<span class="hljs-keyword">var</span> command_list = [];
+command_list.push(<span class="hljs-keyword">new</span> SwitchOnCommand(onOffSwitch));
+command_list.push(<span class="hljs-keyword">new</span> VolumeUpCommand(volume));
+command_list.push(<span class="hljs-keyword">new</span> VolumeDownCommand(volume));
+command_list.push(<span class="hljs-keyword">new</span> SwitchOffCommand(onOffSwitch));
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; command_list.length; i++) {
+    manager.executeCommand(command_list[i]);
+}
+</div></code></pre>
+<h2 id="constructor">Constructor</h2>
+<p>In OOP a constructor is a method that is used to initialize an object from a class. However, because JavaScript is class-less we must declare a special type of constructor. In JavaScript almost everything is an object so we wantto create object constructors.</p>
+<p><strong>NOTE:</strong> In es6 syntax sugar for classes exist, which includes a constructor method</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Basic constructor</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Dog</span> (<span class="hljs-params">name, breed, age</span>) </span>{
+    <span class="hljs-keyword">this</span>.name = name;
+    <span class="hljs-keyword">this</span>.breed = breed;
+    <span class="hljs-keyword">this</span>.age = age;
+
+    <span class="hljs-keyword">this</span>.bark = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.name + <span class="hljs-string">' says, "Woof Woof!"'</span>;
+    }
+}
+
+<span class="hljs-comment">/*
+    Shortcommings:
+        - The function bark will be redefined for each new object created
+          which makes inheritance diffcult.
+    
+    Solution:
+        - Use the objects prototype object. This will allow all child 
+          objects to have access to the same function.
+*/</span>
+
+<span class="hljs-comment">// Constructor with Prototypes</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Dog</span> (<span class="hljs-params">name, breed, age</span>) </span>{
+    <span class="hljs-keyword">this</span>.name = name;
+    <span class="hljs-keyword">this</span>.breed = breed;
+    <span class="hljs-keyword">this</span>.age = age;
+}
+
+Dog.prototype.bark = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.name + <span class="hljs-string">' says, "Woof Woof!"'</span>;
+}
+
+
+<span class="hljs-comment">// Useage</span>
+<span class="hljs-keyword">var</span> ollie = <span class="hljs-keyword">new</span> Dog(<span class="hljs-string">'Ollie'</span>, <span class="hljs-string">'pitbull'</span>, <span class="hljs-number">4</span>);
+
+<span class="hljs-built_in">console</span>.log(ollie.bark());
+</div></code></pre>
+<h2 id="decorators">Decorators</h2>
+<p>Decorators are like mixins where they promote code reuse. However they
+add functionality dynamically to an existing class without modifying
+the underlying code. The use case is if you have an object with may different types.</p>
+<p><strong>Example:</strong> in a game you have some NPC which can have different attributes: withShield, withArmor, withAxe, withAxeAndShield.</p>
+<p><strong>Note:</strong> Decorators differ from mixins because they only effect the object instance, while a mixin will extend the class definition.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Constructor </span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Npc</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">this</span>.armor = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; };
+    <span class="hljs-keyword">this</span>.attack = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; };
+}
+
+<span class="hljs-comment">// Decorators</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">giveShield</span>(<span class="hljs-params">Npc</span>) </span>{
+    <span class="hljs-keyword">var</span> armor = Npc.armor();
+    Npc.armor = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> armor + <span class="hljs-number">5</span>;
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">giveSword</span>(<span class="hljs-params">Npc</span>) </span>{
+    <span class="hljs-keyword">var</span> attack = Npc.attack();
+    Npc.attack = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> attack + <span class="hljs-number">5</span>;
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">giveBuff</span>(<span class="hljs-params">Npc</span>) </span>{
+    <span class="hljs-keyword">var</span> armor = Npc.armor();
+    <span class="hljs-keyword">var</span> attack = Npc.attack();
+    Npc.armor = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> armor + <span class="hljs-number">10</span>;
+    }
+    Npc.attack = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> attack + <span class="hljs-number">10</span>;
+    }
+}
+
+<span class="hljs-comment">// Demo</span>
+
+<span class="hljs-keyword">var</span> npc = <span class="hljs-keyword">new</span> Npc();
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'armor:'</span>, npc.armor(), <span class="hljs-string">'attack:'</span>, npc.attack());
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'gave npc a shield'</span>);
+giveShield(npc);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'armor:'</span>, npc.armor(), <span class="hljs-string">'attack:'</span>, npc.attack());
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'gave npc a sword'</span>);
+giveSword(npc);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'armor:'</span>, npc.armor(), <span class="hljs-string">'attack:'</span>, npc.attack());
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'buffed npc'</span>);
+giveBuff(npc);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'armor:'</span>, npc.armor(), <span class="hljs-string">'attack:'</span>, npc.attack());
+</div></code></pre>
+<h2 id="mixin">Mixin</h2>
+<p>Mixins are a way to allow objects to borrow functionality. They are objects with method and attributes that may be shared elsewhere.  They are grouped together by type (e.g. button, chart, npc etc) and then borrowed by concert classes without the need to form a relationship.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> Receiver = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-keyword">this</span>.prop1 = <span class="hljs-string">'prop1'</span>;
+    <span class="hljs-keyword">this</span>.prop2 = <span class="hljs-string">'prop2'</span>;
+}
+
+<span class="hljs-keyword">var</span> Mixin = {
+    <span class="hljs-attr">mixinFunc1</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'func1'</span>);
+    },
+    <span class="hljs-attr">mixinFunc2</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'func2'</span>);
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">extend</span>(<span class="hljs-params">receiver, mixin</span>) </span>{
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> func <span class="hljs-keyword">in</span> mixin) {
+        <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">Object</span>.hasOwnProperty.call(receiver, func)) {
+            receiver.prototype[func] = mixin[func];
+        }
+    }
+    <span class="hljs-keyword">return</span> receiver;
+}
+
+<span class="hljs-keyword">var</span> orig = <span class="hljs-keyword">new</span> Receiver();
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'original prototype: '</span>)
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.getPrototypeOf(orig));
+
+extend(Receiver, Mixin);
+<span class="hljs-keyword">var</span> receiver = <span class="hljs-keyword">new</span> Receiver();
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'prototype after applying mixin:'</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.getPrototypeOf(receiver));
+</div></code></pre>
+<p>Functional Variant</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> Receiver = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-keyword">this</span>.prop1 = <span class="hljs-string">'prop1'</span>;
+    <span class="hljs-keyword">this</span>.prop2 = <span class="hljs-string">'prop2'</span>;
+}
+
+<span class="hljs-keyword">var</span> Mixin = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">this</span>.mixinFunc1 = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'func1'</span>);
+    },
+    <span class="hljs-keyword">this</span>.mixinFunc2 = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'func2'</span>);
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+}
+
+<span class="hljs-keyword">var</span> orig = <span class="hljs-keyword">new</span> Receiver();
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'original prototype: '</span>)
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.getPrototypeOf(orig));
+
+<span class="hljs-comment">// Normal way using call</span>
+<span class="hljs-comment">// Mixin.call(Receiver.prototype);</span>
+
+<span class="hljs-comment">/*
+However it's somewhat nicer to not expose call and 
+extend Object to have an addMixin function
+Note: this block of code is bested placed on top
+*/</span>
+<span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Object</span>.prototype.addMixin !== <span class="hljs-string">'function'</span>) {
+    <span class="hljs-built_in">Object</span>.prototype.addMixin = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">mixin</span>) </span>{
+        mixin.call(<span class="hljs-keyword">this</span>.prototype);
+    }
+}
+
+Receiver.addMixin(Mixin);
+
+<span class="hljs-keyword">var</span> receiver = <span class="hljs-keyword">new</span> Receiver();
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'prototype after applying mixin:'</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.getPrototypeOf(receiver));
+</div></code></pre>
+<h2 id="facade">Facade</h2>
+<p>The Facade pattern aims to conceal complexity by adding a higher-level
+public interface. It is good for when you have a lot of complex function
+calls underneath and want to provide a simple function instead. Also
+helpful when you would have a lot of boilerplate such as checking
+for special cases.</p>
+<p>Advantages:</p>
+<ul>
+<li>Simplifies public interface.</li>
+<li>Protects internals.</li>
+<li>Very easy to implement.</li>
+</ul>
+<p>Disadvantages:</p>
+<ul>
+<li>None, however one must decide in the extra abstraction is
+really worth it.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// Example: method that mask browser-specific methods</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addEvent</span>(<span class="hljs-params">element, event, callback</span>) </span>{
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">window</span>.addEventListener) {
+        element.addEventListener(event, callback, <span class="hljs-literal">false</span>);
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">document</span>.attachEvent) {
+        element.attachEvent(<span class="hljs-string">'on'</span> + event, callback);
+    } <span class="hljs-keyword">else</span> {
+        element[<span class="hljs-string">'on'</span> + event] = callback;
+    }
+}
+
+<span class="hljs-comment">// Module example</span>
+<span class="hljs-keyword">var</span> Module = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-keyword">var</span> _variable = <span class="hljs-string">'test'</span>;
+    <span class="hljs-keyword">var</span> _setter = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">val</span>) </span>{
+        _variable = val;
+    }
+    <span class="hljs-keyword">var</span> _getter = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+        <span class="hljs-keyword">return</span> _variable;
+    }
+
+    <span class="hljs-keyword">return</span> {
+        <span class="hljs-attr">facade</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">setup</span>) </span>{
+            _setter(setup.val);
+            <span class="hljs-keyword">if</span>(setup.verbose) {
+                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'set value to :'</span>, _getter());
+            }
+        }
+    }
+})();
+
+Module.facade({<span class="hljs-attr">val</span>: <span class="hljs-number">10</span>, <span class="hljs-attr">verbose</span>: <span class="hljs-literal">true</span>});
+</div></code></pre>
+<h2 id="factory">Factory</h2>
+<p>Factories are a common design pattern in OOP. It is an object that creates
+objects. In classical OOP this is used to create objects from the same
+parent class. However, JavaScript does not have typical inheritance so
+the implementation is simplified.</p>
+<p>Advantages:</p>
+<ul>
+<li>Provides an interface to handle object creation</li>
+<li>Great for generating different objects depending on the environment</li>
+<li>Practical for components with similar methods.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Knight</span> (<span class="hljs-params">options</span>) </span>{
+    <span class="hljs-keyword">this</span>.health = options.health || <span class="hljs-number">100</span>;
+    <span class="hljs-keyword">this</span>.level = options.level || <span class="hljs-number">10</span>;
+    <span class="hljs-keyword">this</span>.name = options.name || <span class="hljs-string">'level '</span>+ <span class="hljs-keyword">this</span>.level + <span class="hljs-string">' knight'</span>;
+    <span class="hljs-keyword">this</span>.armorType = options.armorType || <span class="hljs-string">'heavy'</span>;
+    <span class="hljs-keyword">this</span>.weapon = options.weapon || <span class="hljs-string">'sword'</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Mage</span> (<span class="hljs-params">options</span>) </span>{
+    <span class="hljs-keyword">this</span>.health = options.health || <span class="hljs-number">100</span>;
+    <span class="hljs-keyword">this</span>.level = options.level || <span class="hljs-number">10</span>;
+    <span class="hljs-keyword">this</span>.name = options.name || <span class="hljs-string">'level '</span>+ <span class="hljs-keyword">this</span>.level + <span class="hljs-string">' mage'</span>;
+    <span class="hljs-keyword">this</span>.spells = options.spells || [<span class="hljs-string">'magic missle'</span>, <span class="hljs-string">'fireball'</span>];
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">NpcFactory</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-keyword">this</span>.npcClass = Knight;
+}
+
+NpcFactory.prototype.create = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">options</span>) </span>{
+    <span class="hljs-keyword">switch</span>(options.npcType) {
+        <span class="hljs-keyword">case</span> <span class="hljs-string">'knight'</span>:
+        <span class="hljs-keyword">this</span>.npcClass = Knight;
+        <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">'mage'</span>:
+        <span class="hljs-keyword">this</span>.npcClass = Mage;
+        <span class="hljs-keyword">break</span>
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">this</span>.npcClass(options);
+}
+
+
+<span class="hljs-keyword">var</span> npcFactory = <span class="hljs-keyword">new</span> NpcFactory();
+
+<span class="hljs-keyword">var</span> mage = npcFactory.create({
+    <span class="hljs-attr">npcType</span>: <span class="hljs-string">'mage'</span>,
+    <span class="hljs-attr">health</span>: <span class="hljs-number">400</span>,
+    <span class="hljs-attr">spells</span>: [<span class="hljs-string">'frost nova'</span>, <span class="hljs-string">'firestorm'</span>, <span class="hljs-string">'chain lighting'</span>],
+    <span class="hljs-attr">level</span>: <span class="hljs-number">32</span>
+});
+
+<span class="hljs-built_in">console</span>.log(mage);
+
+<span class="hljs-keyword">var</span> knight = npcFactory.create({
+    <span class="hljs-attr">npcType</span>: <span class="hljs-string">'knight'</span>,
+    <span class="hljs-attr">health</span>: <span class="hljs-number">800</span>,
+    <span class="hljs-attr">weapon</span>: <span class="hljs-string">'battle axe'</span>,
+    <span class="hljs-attr">level</span>: <span class="hljs-number">41</span>,
+})
+
+<span class="hljs-built_in">console</span>.log(knight);
+</div></code></pre>
+<h2 id="flyweight">Flyweight</h2>
+<p>The flyweight pattern aims to optimize slow code that inefficiently shares
+data. It reduces the memory footprint of the code by sharing as much
+data as possible with related objects. An example would be generating tiles of terrain in a game. The terrain would consist of some N x M grid where each tile has a terrain type (grass, water, desert, lava etc). Each terrain type comes with its own properties (such as movement penalties) and a texture. If we where to naively place an instance of each object into our grid the terrain map becomes extremely heavy. So the idea is that we create only one instance of each terrain type, and only store a reference to each type in the terrain grid.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> GrassTerrain = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">this</span>.type = <span class="hljs-string">'grass'</span>;
+    <span class="hljs-keyword">this</span>.movementCost = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">this</span>.texture = <span class="hljs-string">'path_to_texture'</span>;
+}
+
+<span class="hljs-keyword">var</span> DesertTerrain = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">this</span>.type = <span class="hljs-string">'desert'</span>;
+    <span class="hljs-keyword">this</span>.movementCost = <span class="hljs-number">5</span>;
+    <span class="hljs-keyword">this</span>.texture = <span class="hljs-string">'path_to_texture'</span>;
+}
+
+<span class="hljs-keyword">var</span> WaterTerrain = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">this</span>.type = <span class="hljs-string">'water'</span>;
+    <span class="hljs-keyword">this</span>.movementCost = <span class="hljs-number">10</span>;
+    <span class="hljs-keyword">this</span>.texture = <span class="hljs-string">'path_to_texture'</span>;
+}
+
+terrainTypes = {
+    <span class="hljs-attr">grass</span>: <span class="hljs-keyword">new</span> GrassTerrain(),
+    <span class="hljs-attr">desert</span>: <span class="hljs-keyword">new</span> DesertTerrain(),
+    <span class="hljs-attr">water</span>: <span class="hljs-keyword">new</span> WaterTerrain()
+};
+
+<span class="hljs-keyword">var</span> generateTerrain = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">x, y, terrainTypes</span>) </span>{
+    <span class="hljs-keyword">var</span> grid = [];
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; x; i++) {
+        <span class="hljs-keyword">var</span> row = [];
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> j = <span class="hljs-number">0</span>; j &lt; y; j++) {
+            <span class="hljs-comment">// pick random terrainType;</span>
+            <span class="hljs-keyword">var</span> keys = <span class="hljs-built_in">Object</span>.keys(terrainTypes);
+            row.push(
+                terrainTypes[keys[keys.length * <span class="hljs-built_in">Math</span>.random() &lt;&lt; <span class="hljs-number">0</span>]]
+            );
+        }
+        grid.push(row);
+    }
+    <span class="hljs-keyword">return</span> grid;
+}
+
+<span class="hljs-comment">// Generate terrain 2x2 for demo purposes</span>
+<span class="hljs-keyword">var</span> terrain = generateTerrain(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>, terrainTypes);
+
+<span class="hljs-comment">// create some other instances of terrain objects to double check</span>
+<span class="hljs-keyword">var</span> otherGrass = <span class="hljs-keyword">new</span> GrassTerrain();
+<span class="hljs-keyword">var</span> otherDesert = <span class="hljs-keyword">new</span> DesertTerrain();
+<span class="hljs-keyword">var</span> otherWater = <span class="hljs-keyword">new</span> WaterTerrain();
+
+<span class="hljs-comment">// Check if titles are references to same terrian instance</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; terrain.length; i++) {
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> j = <span class="hljs-number">0</span>; j &lt; terrain[i].length; j++) {
+       <span class="hljs-keyword">switch</span>(terrain[i][j].type) {
+           <span class="hljs-keyword">case</span> <span class="hljs-string">'grass'</span>:
+                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Is grass:'</span>, terrain[i][j] == terrainTypes.grass);
+                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Is other grass:'</span>, terrain[i][j] == otherGrass);                
+                <span class="hljs-keyword">break</span>;
+           <span class="hljs-keyword">case</span> <span class="hljs-string">'desert'</span>:
+                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Is desert:'</span>, terrain[i][j] == terrainTypes.desert);
+                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Is other desert:'</span>, terrain[i][j] == otherDesert);                
+                <span class="hljs-keyword">break</span>;
+           <span class="hljs-keyword">case</span> <span class="hljs-string">'water'</span>:
+                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Is water:'</span>, terrain[i][j] == terrainTypes.water);
+                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Is other water:'</span>, terrain[i][j] == otherWater);
+                <span class="hljs-keyword">break</span>;
+       }
+       <span class="hljs-built_in">console</span>.log(<span class="hljs-string">''</span>);
+    }
+}
+</div></code></pre>
+<h2 id="pub-sub">Pub Sub</h2>
+<p>The pub/sub is similar to the Observer however it uses an topic/event channel which sits between the objects (subs) and the object firing events (pub). In the observer pattern it is required that the observer subscribes to the object firing the event. The pub/sub allows any object (sub) with the appropriate event handler to register to a specific topic of the publisher.</p>
+<ul>
+<li>works best when objects are totally unrelated or theirs a large number of them</li>
+<li>The publisher doesn't know of the methods subscribers have, the subscribers send the callback to the publisher</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> PubSub = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">obj</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">var</span> _topics = {};
+        <span class="hljs-keyword">return</span> {
+            <span class="hljs-attr">subscribe</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">topic, callback</span>) </span>{
+                <span class="hljs-keyword">if</span> (!_topics[topic]) {
+                    _topics[topic] = [];
+                }
+                _topics[topic].push(callback);
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+            },
+            <span class="hljs-attr">unsubscribe</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">topic, callback</span>) </span>{
+                <span class="hljs-keyword">if</span> (!_topics[topic]) {
+                    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+                }
+                <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; _topics[topic].length; i++) {
+                    <span class="hljs-keyword">if</span>(_topics[topic][i] === callback) {
+                        _topics[topic].splice(i, <span class="hljs-number">1</span>);
+                        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+                    }
+                }
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+            },
+            <span class="hljs-attr">publish</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+                <span class="hljs-comment">// change arguments from obj to array</span>
+                <span class="hljs-keyword">var</span> args = <span class="hljs-built_in">Array</span>.prototype.slice.call(<span class="hljs-built_in">arguments</span>);
+                <span class="hljs-comment">// get first arg (the topic subscribed to)</span>
+                <span class="hljs-keyword">var</span> topic = args.shift();
+                <span class="hljs-keyword">if</span> (!_topics[topic]) {
+                    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+                }
+                <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; _topics[topic].length; i++) {
+                    _topics[topic][i].apply(<span class="hljs-literal">undefined</span>, args);
+                }
+            }
+        }
+    }
+    <span class="hljs-keyword">return</span> obj;
+})();
+
+<span class="hljs-comment">// example subscriber function</span>
+Subscriber1 = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">arg</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'subscriber1 = '</span>, arg);
+}
+Subscriber2 = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">arg</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'subscriber2 = '</span>, arg);
+}
+
+<span class="hljs-keyword">var</span> pubsub = <span class="hljs-keyword">new</span> PubSub();
+pubsub.subscribe(<span class="hljs-string">'topic'</span>, Subscriber1);
+pubsub.publish(<span class="hljs-string">'topic'</span>, <span class="hljs-string">'1 subscriber'</span>);  
+pubsub.subscribe(<span class="hljs-string">'topic'</span>, Subscriber2);
+pubsub.publish(<span class="hljs-string">'topic'</span>, <span class="hljs-string">'2 subscribers'</span>); 
+pubsub.unsubscribe(<span class="hljs-string">'topic'</span>, Subscriber1);
+pubsub.publish(<span class="hljs-string">'topic'</span>, <span class="hljs-string">'1 subscriber'</span>); 
+</div></code></pre>
+<h2 id="mediator">Mediator</h2>
+<p>The mediator pattern is best thought of as air traffic control. Rather
+than have planes communicate with each other, they respond to the
+tower and the tower handles where to direct the message.</p>
+<p>The mediator pattern is very similar to the pub/sub. So similar in fact,
+that the internet can't seem to define the differences well. From what
+I found the key differences are as follows:</p>
+<ul>
+<li>The mediator knows all the components and methods. This differs from a
+pub sub where the subscribers are responsible for sending the callback.</li>
+<li>The mediator decides what to do</li>
+<li>Subscribers contain a reference to the mediator.</li>
+<li>Subscribers can send messages between other subscribers, from -&gt; to.
+The mediator acts as the middleman in the exchange. This is different
+from a pub/sub where the publisher emits an event and the subscribers
+listen for the event and act.</li>
+</ul>
+<p>The mediator pattern works best for objects with indirect relationships.
+So if you have some dialog window or a component of objects waiting on
+certain events.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> Subscriber = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">subscriber</span>(<span class="hljs-params">name</span>) </span>{
+        <span class="hljs-keyword">this</span>.name = name;
+        <span class="hljs-keyword">this</span>.mediator = <span class="hljs-literal">null</span>;
+    }
+
+    subscriber.prototype = {
+        <span class="hljs-attr">send</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">message, to</span>) </span>{
+            <span class="hljs-keyword">this</span>.mediator.broadcast(message, to, <span class="hljs-keyword">this</span>);
+        },
+        <span class="hljs-attr">recieve</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">message, from</span>) </span>{
+            <span class="hljs-built_in">console</span>.log(
+                <span class="hljs-keyword">this</span>.name, <span class="hljs-string">' recieved message "'</span>, message, <span class="hljs-string">'" from '</span>, <span class="hljs-keyword">from</span>.name
+            );
+        },
+        <span class="hljs-attr">unsubscribe</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.mediator) {
+                <span class="hljs-keyword">this</span>.mediator.unsubscribe(<span class="hljs-keyword">this</span>);
+            }
+        }
+    }
+
+    <span class="hljs-keyword">return</span> subscriber;
+})();
+
+<span class="hljs-keyword">var</span> Mediator = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mediator</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">var</span> _subscribers = {};
+        <span class="hljs-keyword">return</span> {
+            <span class="hljs-attr">subscribe</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">sub</span>) </span>{
+                <span class="hljs-keyword">if</span> (_subscribers[sub.name]) {
+                    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'subscriber exists with same name'</span>);
+                    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+                }
+                _subscribers[sub.name] = sub;
+                sub.mediator = <span class="hljs-keyword">this</span>;
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+            },
+            <span class="hljs-attr">unsubscribe</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">sub</span>) </span>{
+                <span class="hljs-keyword">delete</span> _subscribers[sub.name];
+            },
+            <span class="hljs-attr">broadcast</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">message, to, from</span>) </span>{
+                <span class="hljs-keyword">if</span> (!to) {
+                    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> key <span class="hljs-keyword">in</span> _subscribers) {
+                        <span class="hljs-keyword">if</span>(_subscribers[key].name !== <span class="hljs-keyword">from</span>.name) {
+                            _subscribers[key].recieve(message, <span class="hljs-keyword">from</span>);
+                        }
+                    }
+                } <span class="hljs-keyword">else</span> {
+                    <span class="hljs-keyword">if</span> (!_subscribers[to.name]) {
+                        <span class="hljs-built_in">console</span>.log(
+                            <span class="hljs-string">'ERROR: Unable to send message from'</span>,
+                            <span class="hljs-keyword">from</span>.name,
+                            <span class="hljs-string">' to '</span>,
+                            to.name
+                        )
+                    }
+                    to.recieve(message, <span class="hljs-keyword">from</span>);
+                }
+            }
+        };
+    }
+    <span class="hljs-keyword">return</span> mediator;
+})();
+
+<span class="hljs-keyword">var</span> mediator = <span class="hljs-keyword">new</span> Mediator();
+<span class="hljs-keyword">var</span> sub1 = <span class="hljs-keyword">new</span> Subscriber(<span class="hljs-string">'sub1'</span>);
+<span class="hljs-keyword">var</span> sub2 = <span class="hljs-keyword">new</span> Subscriber(<span class="hljs-string">'sub2'</span>);
+<span class="hljs-keyword">var</span> sub3 = <span class="hljs-keyword">new</span> Subscriber(<span class="hljs-string">'sub3'</span>);
+
+mediator.subscribe(sub1);
+mediator.subscribe(sub2);
+mediator.subscribe(sub3);
+
+sub1.send(<span class="hljs-string">'message from sub1 to all'</span>);
+sub3.send(<span class="hljs-string">'message from sub3 to sub1'</span>, sub1);
+</div></code></pre>
+<h2 id="observer">Observer</h2>
+<p>The observer pattern works by having a single object (subject) that maintains a list to a collection of objects (observers) that listen for notifications to when a change of state occurred. The subject broadcast these notifications while the observers listen.</p>
+<p>Advantages:</p>
+<ul>
+<li>Requires deep-level things of relationships between components.</li>
+<li>Helps pinpoint dependencies</li>
+<li>Decouples objects, promoting smaller reusable components.</li>
+</ul>
+<p>Disadvantages:</p>
+<ul>
+<li>Subject and observers are now coupled.</li>
+<li>Emitted events are not separated into topics. All observers responds when notified. Observers cannot pick what topics to subscribe to.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> Subject = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">subject</span> (<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">this</span>.observers = [];
+    }
+
+    subject.prototype = {
+        <span class="hljs-attr">subscribeObserver</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">observer</span>) </span>{
+            <span class="hljs-keyword">this</span>.observers.push(observer);
+        },
+        <span class="hljs-attr">unsubscribeObserver</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">observer</span>) </span>{
+            <span class="hljs-keyword">var</span> idx = <span class="hljs-keyword">this</span>.observers.indexOf(observer);
+            <span class="hljs-keyword">if</span> (idx &gt; <span class="hljs-number">-1</span>) {
+                <span class="hljs-keyword">this</span>.observers.splice(idx, <span class="hljs-number">1</span>);
+            }
+        },
+        <span class="hljs-attr">notifyObserver</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">observer</span>) </span>{
+            <span class="hljs-keyword">var</span> idx = <span class="hljs-keyword">this</span>.observers.indexOf(observer);
+            <span class="hljs-keyword">if</span> (idx &gt; <span class="hljs-number">-1</span>) {
+                <span class="hljs-keyword">this</span>.observers[idx].notify(idx);
+            }
+        },
+        <span class="hljs-attr">notifyAllObservers</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-keyword">this</span>.observers.length; i++) {
+                <span class="hljs-keyword">this</span>.observers[i].notify(i);
+            }
+        }
+    }
+
+    <span class="hljs-keyword">return</span> subject;
+})();
+
+
+<span class="hljs-keyword">var</span> Observer = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-keyword">return</span> {
+        <span class="hljs-attr">notify</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">idx</span>)</span>{
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Observer '</span> + idx + <span class="hljs-string">' was notifed'</span>)
+        }
+    };
+};
+
+<span class="hljs-keyword">var</span> subject = <span class="hljs-keyword">new</span> Subject();
+
+<span class="hljs-keyword">var</span> observer1 = <span class="hljs-keyword">new</span> Observer();
+<span class="hljs-keyword">var</span> observer2 = <span class="hljs-keyword">new</span> Observer();
+
+subject.subscribeObserver(observer1);
+subject.subscribeObserver(observer2);
+
+subject.notifyObserver(observer1);
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'notifying all '</span>);
+subject.notifyAllObservers();
+</div></code></pre>
+<h2 id="prototype">Prototype</h2>
+<p>The prototype pattern allows objects to be created from a template of an
+existing object through cloning. In JavaScript this is very simple to do
+because of the native support for prototypical inheritance.
+Advantages:</p>
+<ul>
+<li>Allows objects to inherit from a blueprint</li>
+<li>Great for object creation</li>
+</ul>
+<p>Disadvantages</p>
+<ul>
+<li>Overkill for projects with few objects</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// template</span>
+<span class="hljs-keyword">var</span> Prototype = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">this</span>.function1 = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'function1'</span>);
+    };
+
+    <span class="hljs-keyword">this</span>.function2 = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.name);
+    };
+}
+
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Obj</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">this</span>.name = <span class="hljs-string">'example'</span>;
+}
+
+<span class="hljs-comment">// inherit from template</span>
+Obj.prototype = <span class="hljs-keyword">new</span> Prototype();
+
+<span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> Obj();
+obj.function1();
+obj.function2();
+</div></code></pre>
+<h2 id="model-view-controller-mvc">Model View Controller (MVC)</h2>
+<p>Model-View-Controller (MVC) is very common in JavaScript for many popular
+frameworks are based off it and can also be found elsewhere.</p>
+<p><strong>Model:</strong> Handle the data for an application. When the model changes it
+notifies any observers that a change occurred so they
+can react.</p>
+<p><strong>View:</strong> Visual representation of the models data. Maintains the DOM and
+watches the model for any change.</p>
+<p><strong>Controller:</strong> The middleman between the model and view. Is responsible
+for updating the model when the user interacts with the
+view.</p>
+<h3 id="indexhtml">index.html</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">&lt;!doctype html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+            <span class="hljs-selector-tag">body</span> {
+                <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#FAFAFA</span>;
+                <span class="hljs-attribute">margin</span>: <span class="hljs-number">60px</span>;
+                <span class="hljs-attribute">font-family</span>: <span class="hljs-string">'Helvetica Neue'</span>;
+            }
+            <span class="hljs-selector-tag">input</span><span class="hljs-selector-attr">[type=text]</span>, <span class="hljs-selector-tag">select</span> {
+                <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+                <span class="hljs-attribute">padding</span>: <span class="hljs-number">12px</span> <span class="hljs-number">20px</span>;
+                <span class="hljs-attribute">margin</span>: <span class="hljs-number">8px</span> <span class="hljs-number">0</span>;
+                <span class="hljs-attribute">display</span>: inline-block;
+                <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-number">#E1E1E1</span>;
+                <span class="hljs-attribute">box-sizing</span>: border-box;
+            }
+            <span class="hljs-selector-tag">button</span> {
+                <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#4C73EA</span>;
+                <span class="hljs-attribute">border</span>: none;
+                <span class="hljs-attribute">color</span>: white;
+                <span class="hljs-attribute">padding</span>: <span class="hljs-number">16px</span> <span class="hljs-number">32px</span>;
+                <span class="hljs-attribute">text-decoration</span>: none;
+                <span class="hljs-attribute">cursor</span>: pointer;
+                <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+            }
+            <span class="hljs-selector-class">.content</span> {
+                <span class="hljs-attribute">margin-right</span>: auto;
+                <span class="hljs-attribute">margin-left</span>: auto;
+            }
+            @<span class="hljs-keyword">media</span> (min-width: <span class="hljs-number">768px</span>) {
+                <span class="hljs-selector-class">.content</span> {
+                    <span class="hljs-attribute">width</span>: <span class="hljs-number">648px</span>;
+                }
+            }
+            <span class="hljs-selector-class">.title</span> {
+                <span class="hljs-attribute">text-align</span>: center;
+                <span class="hljs-attribute">font-family</span>: <span class="hljs-string">'Helvetica Neue'</span>;
+                <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">100</span>;
+                <span class="hljs-attribute">font-size</span>: <span class="hljs-number">42px</span>;
+            }
+            
+            <span class="hljs-selector-class">.todo-container</span> {
+                <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">20px</span>;
+            }
+            <span class="hljs-selector-class">.todo-card</span> {
+                <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0px</span> <span class="hljs-number">1px</span> <span class="hljs-number">3px</span> <span class="hljs-number">0px</span> <span class="hljs-built_in">rgba</span>(0, 0, 0, 0.21);
+                <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">2px</span>;
+                <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">14px</span>;
+                <span class="hljs-attribute">padding</span>: <span class="hljs-number">30px</span> <span class="hljs-number">20px</span>;
+                <span class="hljs-attribute">background-color</span>: white;
+                <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">300</span>;
+            }
+        </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>MVC<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"content"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"title"</span>&gt;</span> Todos <span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"todo-input"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">input</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"add"</span>&gt;</span>Add Todo<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"todo-list"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"todo-container"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"mvc.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</div></code></pre>
+<h3 id="mvcjs">mvc.js</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> Event = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">var</span> event = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">this</span>.subscribers = [];
+    }
+    event.prototype = {
+        <span class="hljs-attr">register</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">subscriber</span>) </span>{
+            <span class="hljs-keyword">this</span>.subscribers.push(subscriber);
+        },
+        <span class="hljs-attr">notify</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">args</span>) </span>{
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-keyword">this</span>.subscribers.length; i ++) {
+                <span class="hljs-keyword">this</span>.subscribers[i](args);
+            }
+        }
+    }
+    <span class="hljs-keyword">return</span> event;
+})();
+
+<span class="hljs-keyword">var</span> Model = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">var</span> model = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-comment">// Todo Data</span>
+        <span class="hljs-keyword">this</span>.uid = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">this</span>.todos = [];
+        <span class="hljs-comment">// events</span>
+        <span class="hljs-keyword">this</span>.todoAdded = <span class="hljs-keyword">new</span> Event();
+    }
+    model.prototype = {
+        <span class="hljs-comment">// Data modifiers</span>
+        addTodo: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">todo</span>) </span>{
+            <span class="hljs-keyword">this</span>.todos.push(todo);
+            <span class="hljs-keyword">this</span>.todoAdded.notify();
+        },
+        <span class="hljs-attr">getTodos</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.todos;
+        }
+    }
+    <span class="hljs-keyword">return</span> model;
+})();
+
+<span class="hljs-keyword">var</span> View = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">var</span> view = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">model</span>) </span>{
+        <span class="hljs-keyword">this</span>.model = model;
+        <span class="hljs-keyword">this</span>.addButtonClicked = <span class="hljs-keyword">new</span> Event();
+
+        <span class="hljs-keyword">var</span> _this = <span class="hljs-keyword">this</span>;
+
+        <span class="hljs-keyword">this</span>.model.todoAdded.register(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            _this.buildTodoList();
+        });
+
+        <span class="hljs-keyword">this</span>.init = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">this</span>.buildTodoList();
+            <span class="hljs-keyword">var</span> addButton = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'add'</span>);
+            <span class="hljs-keyword">var</span> input = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'todo-input'</span>);
+            addButton.addEventListener(<span class="hljs-string">'click'</span>,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+                _this.addTodo();
+            });
+            input.addEventListener(<span class="hljs-string">'keypress'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>{
+                <span class="hljs-keyword">if</span>  (e.keyCode === <span class="hljs-number">13</span>) {
+                    _this.addTodo();
+                }
+            });
+        }
+    }
+    view.prototype = {
+         <span class="hljs-attr">addTodo</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">this</span>.addButtonClicked.notify();
+        },
+        <span class="hljs-attr">getInput</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+            <span class="hljs-keyword">var</span> todo = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'todo-input'</span>).value;
+            <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'todo-input'</span>).value = <span class="hljs-string">''</span>;
+            <span class="hljs-keyword">return</span> todo;
+        },
+        <span class="hljs-attr">buildTodoList</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">var</span> todos = <span class="hljs-keyword">this</span>.model.getTodos();
+            <span class="hljs-keyword">var</span> todoList = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'todo-list'</span>);
+            todoList.innerHTML = <span class="hljs-string">''</span>;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; todos.length; i++) {
+                card = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'div'</span>);
+                card.appendChild(
+                    <span class="hljs-built_in">document</span>.createTextNode(todos[i])
+                );
+                card.classList += <span class="hljs-string">'todo-card'</span>;
+                todoList.appendChild(card);
+            }
+        }
+    }
+    <span class="hljs-keyword">return</span> view;
+})();
+
+<span class="hljs-keyword">var</span> Controller = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    controller = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">model, view</span>) </span>{
+        <span class="hljs-keyword">this</span>.model = model;
+        <span class="hljs-keyword">this</span>.view = view;
+
+        <span class="hljs-keyword">var</span> _this = <span class="hljs-keyword">this</span>;
+
+        <span class="hljs-keyword">this</span>.view.addButtonClicked.register(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            _this.addTodo();
+        });
+    }
+    controller.prototype = {
+        <span class="hljs-attr">addTodo</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">this</span>.model.addTodo(<span class="hljs-keyword">this</span>.view.getInput());
+        }
+    }
+    <span class="hljs-keyword">return</span> controller;
+})();
+
+<span class="hljs-keyword">var</span> todo = <span class="hljs-keyword">new</span> Model();
+<span class="hljs-keyword">var</span> todoView = <span class="hljs-keyword">new</span> View(todo);
+<span class="hljs-keyword">var</span> todoController = <span class="hljs-keyword">new</span> Controller(todo, todoView);
+
+todoView.init();
+</div></code></pre>
+
+</body>
+</html>
